@@ -1,14 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.edinaftc.ninevolt.core.hw.drivetrain.MecanumMovement;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.edinaftc.ninevolt.core.hw.Hardware;
 import com.edinaftc.ninevolt.core.hw.HardwareBuilder;
-import com.edinaftc.ninevolt.core.hw.drivetrain.mecanum.Movement;
+import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
@@ -47,14 +49,14 @@ public class HSRobot {
     gripper = new Gripper("bigServo", "bottomServo", "topServo", ctx);
     elevator = new Elevator(ctx.hardwareMap.dcMotor.get("elevatorMotor"), ctx);
     tollbooth = initializeTollbooth(ctx);
-    movement = new Movement(hardware, ctx);
+    movement = new MecanumMovement(hardware, ctx);
   }
 
   public HSRobot(LinearOpMode _ctxl) throws Exception {
     this.ctxl = _ctxl;
     this.ctx = _ctxl;
     hardware = initializeHardware(ctxl.hardwareMap);
-    movement = new Movement(hardware, ctxl, PULSES_PER_INCH);
+    movement = new MecanumMovement(hardware, ctxl, PULSES_PER_INCH);
     elevator = new Elevator(ctx.hardwareMap.dcMotor.get("elevatorMotor"), 8.5, ctxl);
     tollbooth = initializeTollbooth(ctx);
     gripper = new Gripper("bigServo", "bottomServo", "topServo", ctxl);
@@ -68,7 +70,7 @@ public class HSRobot {
 
   private Hardware initializeHardware(HardwareMap hardwareMap) throws Exception {
     HardwareBuilder hb = new HardwareBuilder(hardwareMap);
-    hb.setMotorConfig(Hardware.MotorMode.MECANUM, DcMotor.Direction.FORWARD);
+    hb.setMotorDirection(DcMotor.Direction.FORWARD);
     hb
         .addMotorFL("motorFL")
         .addMotorFR("motorFR")

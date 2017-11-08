@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.edinaftc.ninevolt.core.hw.drivetrain.mecanum.Movement;
+import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
@@ -33,7 +33,7 @@ public class HSTeleOp extends OpMode {
       gripper = robot.getGripper();
       elevator = robot.getElevator();
 
-      movement.setRunUsingEncoders();
+      movement.setRunUsingEncoders(true);
       movement.setVerbose(true);
 
       // Alert user that initialization was successful
