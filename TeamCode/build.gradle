@@ -18,5 +18,5 @@ repositories {
     }
 }
 dependencies {
-    compile (group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.0-alpha-2', ext: 'aar')
+    compile (group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.0-alpha-8', ext: 'aar')
 }

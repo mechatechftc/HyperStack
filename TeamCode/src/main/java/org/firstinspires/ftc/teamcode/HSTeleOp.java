@@ -50,24 +50,33 @@ public class HSTeleOp extends OpMode {
   @Override
   public void start() {
     // Initalize block timer
-    resetStartTime();
-    block = 1;
-    lastBlockUpdateTime = 0;
+    try {
+      resetStartTime();
+      block = 1;
+      lastBlockUpdateTime = 0;
+    } catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
+    }
   }
 
   // Loop block - run repeatedly after init
   @Override
   public void loop() {
+    try {
 
-    drive(softGear());
+      drive(softGear());
 
-    grip();
+      grip();
 
-    gripLock();
+      gripLock();
 
-    moveElevator();
+      moveElevator();
 
-    blockNotify(getRuntime());
+      blockNotify(getRuntime());
+
+    } catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
+    }
 
   }
 
