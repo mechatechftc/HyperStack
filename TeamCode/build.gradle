@@ -12,6 +12,11 @@
 // Custom definitions may go here
 // Include common definitions from above.
 apply from: '../build.common.gradle'
+repositories {
+    maven {
+        url 'http://dl.bintray.com/edinaftc/ftc'
+    }
+}
 dependencies {
-    compile (group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0-alpha-1', ext: 'aar')
+    compile (group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.0-alpha-2', ext: 'aar')
 }

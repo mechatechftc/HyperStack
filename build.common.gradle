@@ -96,9 +96,6 @@ android {
 }
 
 repositories {
-    maven {
-        url "http://dl.bintray.com/edinaftc/ftc"
-    }
     flatDir {
         dirs rootProject.file('libs')
     }
