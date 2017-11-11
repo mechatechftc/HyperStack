@@ -32,6 +32,7 @@ public class Elevator {
   }
   public Elevator(DcMotor mainMotor, double maxHeight, LinearOpMode ctxl) throws Exception {
     this.motor = mainMotor;
+    this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     this.ctxl = ctxl;
     this.ctx = ctxl;
     this.ppi = PULSES_PER_INCH;

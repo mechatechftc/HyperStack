@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import org.firstinspires.ftc.teamcode.HSRobot;
+import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
@@ -15,6 +16,7 @@ public class AutonomousMain extends LinearOpMode {
   private Movement movement;
   private Gripper gripper;
   private Tollbooth tollbooth;
+  private Elevator elevator;
 
   private StepNotifier notifier;
 
@@ -33,6 +35,8 @@ public class AutonomousMain extends LinearOpMode {
 
       // Perform autonomous
       gripper.grip();
+      elevator.elevate(4);
+      sleep(1000);
       bumpJewel();                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
       releaseGlyph();               // Deposit glyph.
@@ -49,6 +53,7 @@ public class AutonomousMain extends LinearOpMode {
     movement = robot.getMovement();
     gripper = robot.getGripper();
     tollbooth = robot.getTollbooth();
+    elevator = robot.getElevator();
 
     notifier = new StepNotifier(new String[] {
         "Elevator up",
@@ -68,15 +73,15 @@ public class AutonomousMain extends LinearOpMode {
     sleep(3000);
     if (tollbooth.checkColor() == Tollbooth.JewelColor.BLUE) {
       movement.rotate(-15, 0.2f);
-      sleep(500);
+      sleep(5000);
       tollbooth.raise();
-      sleep(500);
+      sleep(5000);
       movement.rotate(15, 0.2f);
     } else if (tollbooth.checkColor() == Tollbooth.JewelColor.RED) {
       movement.rotate(15, 0.2f);
-      sleep(500);
+      sleep(5000);
       tollbooth.raise();
-      sleep(500);
+      sleep(5000);
       movement.rotate(-15, 0.2f);
     } else {
       telemetry.addLine("Error with color sensor readings");
@@ -85,9 +90,9 @@ public class AutonomousMain extends LinearOpMode {
   }
 
   private void moveToGlyphBox() throws Exception {
-    movement.yDrive(28, 0.2f);
-    movement.rotate(90, 0.2);
-    movement.yDrive(12, 0.2f);
+    movement.yDrive(-41, 0.5f);
+    sleep(1000);
+    movement.rotate(-90, 0.2);
   }
 
   private void releaseGlyph() {
