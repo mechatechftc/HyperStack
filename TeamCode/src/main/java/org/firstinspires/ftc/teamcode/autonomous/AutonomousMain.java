@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import org.firstinspires.ftc.teamcode.HSRobot;
-import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
@@ -15,7 +14,6 @@ public class AutonomousMain extends LinearOpMode {
   private HSRobot robot;
   private Movement movement;
   private Gripper gripper;
-  private Elevator elevator;
   private Tollbooth tollbooth;
 
   private StepNotifier notifier;
@@ -50,7 +48,6 @@ public class AutonomousMain extends LinearOpMode {
     // Retrieve variables
     movement = robot.getMovement();
     gripper = robot.getGripper();
-    elevator = robot.getElevator();
     tollbooth = robot.getTollbooth();
 
     notifier = new StepNotifier(new String[] {
