@@ -70,9 +70,13 @@ public class AutonomousMain extends LinearOpMode {
     tollbooth.lower(); // Lower tollbooth arm
     sleep(3000);
     if (tollbooth.checkColor() == Tollbooth.JewelColor.BLUE) {
-      movement.rotate(5, 0.2f);
+      movement.rotate(-15, 0.2f);
+      sleep(500);
+      movement.rotate(15, 0.2f);
     } else if (tollbooth.checkColor() == Tollbooth.JewelColor.RED) {
-      movement.rotate(-5, 0.2f);
+      movement.rotate(15, 0.2f);
+      sleep(500);
+      movement.rotate(-15, 0.2f);
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
@@ -83,7 +87,6 @@ public class AutonomousMain extends LinearOpMode {
   }
 
   private void moveToGlyphBox() throws Exception {
-    movement.xDrive(12, 0.2f);
     movement.yDrive(28, 0.2f);
   }
 
