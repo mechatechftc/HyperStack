@@ -77,7 +77,9 @@ public class AutonomousMain extends LinearOpMode {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
     }
+    sleep(3000);
     tollbooth.raise();
+    sleep(3000);
   }
 
   private void moveToGlyphBox() throws Exception {
