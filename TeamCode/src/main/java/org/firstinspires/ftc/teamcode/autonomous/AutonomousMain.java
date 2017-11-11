@@ -34,7 +34,6 @@ public class AutonomousMain extends LinearOpMode {
       resetStartTime();
 
       // Perform autonomous
-      initGrip(9.5);                // Grip block without knocking it off.
       bumpJewel();                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
       releaseGlyph();               // Deposit glyph.
@@ -64,17 +63,6 @@ public class AutonomousMain extends LinearOpMode {
         "Raise tollbooth",
         "Move off platform"
     }, this);
-  }
-
-  private void initGrip(double delta) throws Exception {
-    elevator.elevate(delta);
-    notifier.notifyStep();
-    gripper.wideRelease();
-    notifier.notify();
-    elevator.elevate(-delta);
-    notifier.notifyStep();
-    gripper.grip();
-    notifier.notifyStep();
   }
 
   private void bumpJewel() {
