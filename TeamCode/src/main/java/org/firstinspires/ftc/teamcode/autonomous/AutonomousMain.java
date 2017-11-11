@@ -34,6 +34,7 @@ public class AutonomousMain extends LinearOpMode {
       resetStartTime();
 
       // Perform autonomous
+      gripper.grip();
       bumpJewel();                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
       releaseGlyph();               // Deposit glyph.
@@ -65,18 +66,13 @@ public class AutonomousMain extends LinearOpMode {
     }, this);
   }
 
-  private void bumpJewel() {
+  private void bumpJewel() throws Exception {
     tollbooth.lower(); // Lower tollbooth arm
+    sleep(3000);
     if (tollbooth.checkColor() == Tollbooth.JewelColor.BLUE) {
-      double startTime = getRuntime();
-      while(getRuntime() < startTime + 1) {
-          movement.directDrive(0, 0, 0.2f);
-      }
+      movement.rotate(5, 0.2f);
     } else if (tollbooth.checkColor() == Tollbooth.JewelColor.RED) {
-      double startTime = getRuntime();
-      while(getRuntime() < startTime + 1) {
-          movement.directDrive(0, 0, -0.2f);
-      }
+      movement.rotate(-5, 0.2f);
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
@@ -85,8 +81,8 @@ public class AutonomousMain extends LinearOpMode {
   }
 
   private void moveToGlyphBox() throws Exception {
-    movement.xDrive(12);
-    movement.yDrive(28);
+    movement.xDrive(12, 0.2f);
+    movement.yDrive(28, 0.2f);
   }
 
   private void releaseGlyph() {

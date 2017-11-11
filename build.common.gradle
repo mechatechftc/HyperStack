@@ -99,6 +99,5 @@ repositories {
     flatDir {
         dirs rootProject.file('libs')
     }
-    maven { url 'http://dl.bintray.com/edinaftc/ftc/' }
 }
 apply from: 'build.release.gradle'
