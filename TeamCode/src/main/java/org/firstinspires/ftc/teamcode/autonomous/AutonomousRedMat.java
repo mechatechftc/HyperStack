@@ -107,9 +107,10 @@ public class AutonomousRedMat extends LinearOpMode {
     movement.yDrive(-41, 0.5f);
     sleep(1000);
     movement.directDrive(0f,0f,0f);
-//    sleep(500);
-//    movement.rotate(-15, 0.2f);
-//    sleep(1000);
+    sleep(500);
+    movement.rotate(-15, 0.2f);
+    sleep(1000);
+    movement.yDrive(12.0, 0.2f);
   }
 
   private void releaseGlyph() {
