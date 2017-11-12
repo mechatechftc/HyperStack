@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
-@Autonomous(name = "Red Autonomous 2", group = "real")
-public class RedAutonomous2 extends LinearOpMode {
+@Autonomous(name = "Red Autonomous Driver Box", group = "real")
+public class AutonomousRedDriver extends LinearOpMode {
 
   private HSRobot robot;
   private Movement movement;
