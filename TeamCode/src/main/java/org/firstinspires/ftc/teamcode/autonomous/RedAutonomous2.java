@@ -25,6 +25,7 @@ public class RedAutonomous2 extends LinearOpMode {
     try {
       customInit();
       bumpJewel();
+      moveBack();
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
     }
@@ -74,6 +75,13 @@ public class RedAutonomous2 extends LinearOpMode {
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
+    }
+  }
+  private void moveBack() {
+    try {
+      movement.yDrive(-35, 0.2f);
+    } catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
     }
   }
 }
