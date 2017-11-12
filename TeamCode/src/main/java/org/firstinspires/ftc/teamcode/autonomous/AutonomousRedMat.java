@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
-@Autonomous(name = "Red Autonomous", group = "real")
-public class AutonomousRed extends LinearOpMode {
+@Autonomous(name = "Red Autonomous Mat Side", group = "real")
+public class AutonomousRedMat extends LinearOpMode {
   private HSRobot robot;
   private Movement movement;
   private Gripper gripper;
@@ -40,7 +40,7 @@ public class AutonomousRed extends LinearOpMode {
       sleep(1000);
       bumpJewel();                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
-      releaseGlyph();               // Deposit glyph.
+//      releaseGlyph();               // Deposit glyph.
 
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
@@ -107,8 +107,8 @@ public class AutonomousRed extends LinearOpMode {
     movement.yDrive(-41, 0.5f);
     sleep(1000);
     movement.directDrive(0f,0f,0f);
-    sleep(1000);
-    movement.rotate(-90, 0.5f);
+    sleep(500);
+    movement.rotate(-15, 0.2f);
     sleep(1000);
   }
 
