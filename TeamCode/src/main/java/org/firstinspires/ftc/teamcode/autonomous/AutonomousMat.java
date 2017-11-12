@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
@@ -10,8 +9,7 @@ import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
-@Autonomous(name = "Blue Autonomous Mat Side", group = "real")
-public class AutonomousBlueMat extends LinearOpMode {
+public abstract class AutonomousMat extends LinearOpMode {
   private HSRobot robot;
   private Movement movement;
   private Gripper gripper;
@@ -19,6 +17,11 @@ public class AutonomousBlueMat extends LinearOpMode {
   private Elevator elevator;
 
   private StepNotifier notifier;
+
+  protected abstract double getYDist();
+  protected abstract double getSecondRotationAngle();
+  protected abstract Tollbooth.JewelColor getAllianceColor();
+  protected abstract Tollbooth.JewelColor getOppositionColor();
 
   @Override
   public void runOpMode() throws InterruptedException {
@@ -81,19 +84,20 @@ public class AutonomousBlueMat extends LinearOpMode {
     sleep(3000);
     Tollbooth.JewelColor color = tollbooth.checkColor();
     notifier.notifyStep();
-    if (color == Tollbooth.JewelColor.RED) {
+    if (color == getOppositionColor()) {
       movement.rotate(15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
-      movement.rotate(-30, 0.2f);
-    } else if (color == Tollbooth.JewelColor.BLUE) {
+      movement.rotate(-15, 0.2f);
+    } else if (color == getAllianceColor()) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
+      movement.rotate(15, 0.2f);
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
@@ -102,11 +106,11 @@ public class AutonomousBlueMat extends LinearOpMode {
 
   private void moveToGlyphBox() throws Exception {
     sleep(250);
-    movement.yDrive(41, 0.5f);
+    movement.yDrive(getYDist(), 0.5f);
     sleep(1000);
     movement.directDrive(0f,0f,0f);
     /*sleep(500);
-    movement.rotate(-90, 0.2f);
+    movement.rotate(getSecondRotationDistance(), 0.2f);
     sleep(1000);
     movement.yDrive(12.0, 0.2f);*/
   }

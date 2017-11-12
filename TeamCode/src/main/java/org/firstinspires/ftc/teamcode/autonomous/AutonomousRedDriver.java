@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 @Autonomous(name = "Red Autonomous Driver Box", group = "real")
-
 public class AutonomousRedDriver extends LinearOpMode {
 
   private HSRobot robot;
