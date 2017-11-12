@@ -52,6 +52,8 @@ public class AutonomousBlueDriver extends LinearOpMode {
   }
 
   private void bumpJewel() throws Exception {
+    gripper.grip();
+    elevator.elevate(5);
     tollbooth.lower(); // Lower tollbooth arm
     notifier.notifyStep();
     sleep(3000);
