@@ -26,6 +26,7 @@ public class AutonomousRedDriver extends LinearOpMode {
       customInit();
       bumpJewel();
       moveBack();
+      dropGlyph();
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
     }
@@ -79,5 +80,9 @@ public class AutonomousRedDriver extends LinearOpMode {
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
     }
+  }
+  private void dropGlyph() throws Exception{
+    elevator.elevate(-5);
+    gripper.wideRelease();
   }
 }

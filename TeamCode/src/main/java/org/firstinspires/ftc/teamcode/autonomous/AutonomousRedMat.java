@@ -111,7 +111,8 @@ public class AutonomousRedMat extends LinearOpMode {
     movement.yDrive(12.0, 0.2f);*/
   }
 
-  private void releaseGlyph() {
+  private void releaseGlyph() throws Exception{
+    elevator.elevate(-5);
     gripper.wideRelease();
   }
 
