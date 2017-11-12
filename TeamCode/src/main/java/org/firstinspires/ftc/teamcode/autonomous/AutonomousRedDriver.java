@@ -62,15 +62,11 @@ public class AutonomousRedDriver extends LinearOpMode {
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
-      movement.rotate(-15, 0.2f);
-      sleep(3000);
     } else if (color == Tollbooth.JewelColor.RED) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
-      sleep(3000);
-      movement.rotate(15, 0.2f);
       sleep(3000);
     } else {
       telemetry.addLine("Error with color sensor readings");
