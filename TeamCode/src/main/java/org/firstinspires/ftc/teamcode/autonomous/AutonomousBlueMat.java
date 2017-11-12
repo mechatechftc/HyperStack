@@ -39,7 +39,7 @@ public class AutonomousBlueMat extends LinearOpMode {
       notifier.notifyStep();
       sleep(1000);
       bumpJewel();                  // Read jewel color and knock appropriately.
-//      moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
+      moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
 //      releaseGlyph();               // Deposit glyph.
 
     } catch (Exception e) {
@@ -86,17 +86,15 @@ public class AutonomousBlueMat extends LinearOpMode {
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
-//      sleep(3000);
-//      movement.rotate(-15, 0.2f);
-//      sleep(3000);
+      sleep(3000);
+      movement.rotate(-15, 0.2f);
     } else if (color == Tollbooth.JewelColor.BLUE) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
-//      movement.rotate(15, 0.2f);
-//      sleep(3000);
+      movement.rotate(15, 0.2f);
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
@@ -104,13 +102,14 @@ public class AutonomousBlueMat extends LinearOpMode {
   }
 
   private void moveToGlyphBox() throws Exception {
+    sleep(250);
     movement.yDrive(41, 0.5f);
     sleep(1000);
     movement.directDrive(0f,0f,0f);
     sleep(500);
-    movement.rotate(-15, 0.2f);
+    movement.rotate(-90, 0.2f);
     sleep(1000);
-    movement.yDrive(12, 0.2f);
+    movement.yDrive(12.0, 0.2f);
   }
 
   private void releaseGlyph() {

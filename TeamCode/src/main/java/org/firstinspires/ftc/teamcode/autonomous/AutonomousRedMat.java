@@ -88,7 +88,6 @@ public class AutonomousRedMat extends LinearOpMode {
       tollbooth.raise();
       sleep(3000);
       movement.rotate(-15, 0.2f);
-      sleep(3000);
     } else if (color == Tollbooth.JewelColor.RED) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
@@ -96,7 +95,6 @@ public class AutonomousRedMat extends LinearOpMode {
       tollbooth.raise();
       sleep(3000);
       movement.rotate(15, 0.2f);
-      sleep(3000);
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
@@ -104,11 +102,12 @@ public class AutonomousRedMat extends LinearOpMode {
   }
 
   private void moveToGlyphBox() throws Exception {
+    sleep(250);
     movement.yDrive(-41, 0.5f);
     sleep(1000);
     movement.directDrive(0f,0f,0f);
     sleep(500);
-    movement.rotate(-15, 0.2f);
+    movement.rotate(-90, 0.2f);
     sleep(1000);
     movement.yDrive(12.0, 0.2f);
   }
