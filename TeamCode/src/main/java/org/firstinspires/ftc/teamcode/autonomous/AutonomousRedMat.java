@@ -108,7 +108,10 @@ public class AutonomousRed extends LinearOpMode {
     sleep(1000);
     movement.directDrive(0f,0f,0f);
     sleep(1000);
-    movement.rotate(-90, 0.5f);
+    for (int i = 0; i < 6; i++) {
+      movement.rotate(-15, 0.5f);
+      idle();
+    }
     sleep(1000);
   }
 

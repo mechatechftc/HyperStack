@@ -56,25 +56,29 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             android:adjustViewBounds="true"
             android:layout_margin="1dp" android:padding="16dp"/>
 
-    <TextView
-            android:text="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="56dp"
-            android:id="@+id/textAppTitle"
-            android:textAppearance="@android:style/TextAppearance"
-            android:textSize="20sp" android:fontFamily="sans-serif-medium"
-            android:textColor="@android:color/white"/>
-    <TextView
-            android:id="@+id/textDeviceName"
-            android:layout_toEndOf="@id/robotIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/textWhite"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:padding="8dp"
-            android:textStyle="bold"/>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_centerVertical="true"
+                  android:layout_toEndOf="@id/robotIcon">
+      <TextView
+              android:text="@string/app_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:id="@+id/textAppTitle"
+              android:textAppearance="@android:style/TextAppearance"
+              android:textSize="20sp"
+              android:fontFamily="sans-serif-medium"
+              android:textColor="@android:color/white"/>
+      <TextView
+              android:id="@+id/textDeviceName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="?attr/textWhite"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:textStyle="bold"/>
+    </LinearLayout>
 
     <ImageButton
             android:id="@+id/menu_buttons"
