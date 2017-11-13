@@ -36,11 +36,11 @@ public class AutonomousBlueMat extends LinearOpMode {
       // Perform autonomous
       gripper.grip();
       elevator.elevate(4);
-      notifier.notifyStep();
+      // notifier.notifyStep();
       sleep(1000);
       bumpJewel();                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
-//      releaseGlyph();               // Deposit glyph.
+      releaseGlyph();               // Deposit glyph.
 
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
@@ -52,10 +52,11 @@ public class AutonomousBlueMat extends LinearOpMode {
     robot = new HSRobot(this); // Initializes robot
     // Retrieve variables
     movement = robot.getMovement();
+    movement.setVerbose(false);
     gripper = robot.getGripper();
     tollbooth = robot.getTollbooth();
     elevator = robot.getElevator();
-
+    elevator.setVerbose(false);
     notifier = new StepNotifier(new String[] {
         "Elevator up",
         "Tollbooth lowered",
@@ -76,35 +77,33 @@ public class AutonomousBlueMat extends LinearOpMode {
   }
 
   private void bumpJewel() throws Exception {
-    gripper.grip();
-    elevator.elevate(5);
     tollbooth.lower(); // Lower tollbooth arm
-    notifier.notifyStep();
+    // notifier.notifyStep();
     sleep(3000);
     Tollbooth.JewelColor color = tollbooth.checkColor();
-    notifier.notifyStep();
+    // notifier.notifyStep();
     if (color == Tollbooth.JewelColor.RED) {
       movement.rotate(15, 0.2f);
-      notifier.notifyStep();
+      // notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
-      movement.rotate(-30, 0.2f);
+      movement.rotate(-45, 0.2f);
     } else if (color == Tollbooth.JewelColor.BLUE) {
-      movement.rotate(-15, 0.2f);
-      notifier.notifyStep();
+      movement.rotate(-30, 0.2f);
+      // notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
     } else {
-      telemetry.addLine("Error with color sensor readings");
+      telemetry.addData("ColorSensor", "Error with color sensor readings");
       telemetry.update();
     }
   }
 
   private void moveToGlyphBox() throws Exception {
     sleep(250);
-    movement.yDrive(41, 0.5f);
+    movement.yDrive(36, 0.5f);
     sleep(1000);
     movement.directDrive(0f,0f,0f);
     /*sleep(500);
@@ -114,7 +113,7 @@ public class AutonomousBlueMat extends LinearOpMode {
   }
 
   private void releaseGlyph() throws Exception{
-    elevator.elevate(-5);
+    elevator.elevate(-3);
     gripper.wideRelease();
   }
 }

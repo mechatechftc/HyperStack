@@ -40,9 +40,9 @@ public class Gripper {
   }
 
   public void updateTelemetry() {
-    if (isGripping()) ctx.telemetry.addData("Gripper", "Closed");
-    else ctx.telemetry.addData("Gripper", "Open");
-    ctx.telemetry.update();
+//    if (isGripping()) ctx.telemetry.addData("Gripper", "Closed");
+//    else ctx.telemetry.addData("Gripper", "Open");
+//    ctx.telemetry.update();
   }
 
   public void bottomGrip() {
