@@ -13,11 +13,16 @@
 // Include common definitions from above.
 
 apply from: '../build.common.gradle'
+
 repositories {
     maven {
-        url 'https://dl.bintray.com/edinaftc/ftc'
+        url "${artifactory_contextUrl}/libs-snapshot"
+        credentials {
+            username "${artifactory_user}"
+            password "${artifactory_password}"
+        }
     }
 }
 dependencies {
-    compile(group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.1-alpha-21', ext: 'aar', classifier: '')
+    compile(group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.1-alpha-SNAPSHOT', ext: 'aar', classifier: '')
 }
