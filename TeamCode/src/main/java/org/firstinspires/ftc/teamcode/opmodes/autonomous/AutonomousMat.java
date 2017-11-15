@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous;
 
+import com.edinaftc.ninevolt.Config;
+import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -29,8 +31,11 @@ public abstract class AutonomousMat extends LinearOpMode {
       // Initialize robot and variables
       customInit();
       // Alert user that initialization was successful
-      telemetry.addData("Initialization", "Done!");
-      telemetry.update();
+
+      if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.RECOMMENDED)) {
+        telemetry.addData("Initialization", "Done!");
+        telemetry.update();
+      }
 
       // Wait until play button is pressed
       waitForStart();

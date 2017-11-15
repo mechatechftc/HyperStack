@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.autonomous;
+package org.firstinspires.ftc.teamcode.opmodes.autonomous.old;
 
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
-@Autonomous(name = "Red Autonomous Driver Box", group = "real")
-public class AutonomousRedDriver extends LinearOpMode {
+@Autonomous(name = "Blue Autonomous Driver Box", group = "real")
+public class AutonomousBlueDriver extends LinearOpMode {
 
   private HSRobot robot;
   private Movement movement;
@@ -52,18 +52,20 @@ public class AutonomousRedDriver extends LinearOpMode {
   }
 
   private void bumpJewel() throws Exception {
+    gripper.grip();
+    elevator.elevate(5);
     tollbooth.lower(); // Lower tollbooth arm
     notifier.notifyStep();
     sleep(3000);
     Tollbooth.JewelColor color = tollbooth.checkColor();
     notifier.notifyStep();
-    if (color == Tollbooth.JewelColor.BLUE) {
+    if (color == Tollbooth.JewelColor.RED) {
       movement.rotate(15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
-    } else if (color == Tollbooth.JewelColor.RED) {
+    } else if (color == Tollbooth.JewelColor.BLUE) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
@@ -76,7 +78,7 @@ public class AutonomousRedDriver extends LinearOpMode {
   }
   private void moveBack() {
     try {
-      movement.yDrive(-28, 0.2f);
+      movement.yDrive(28, 0.2f);
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
     }
