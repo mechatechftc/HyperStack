@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.MecanumMovement;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -45,6 +46,7 @@ public class HSRobot {
 
   public HSRobot(OpMode _ctx) throws Exception {
     this.ctx = _ctx;
+    Ninevolt.setConfig(HSConfig.getInstance());
     hardware = initializeHardware(ctx.hardwareMap);
     gripper = new Gripper("bigServo", "bottomServo", "topServo", ctx);
     elevator = new Elevator(ctx.hardwareMap.dcMotor.get("elevatorMotor"), ctx);
@@ -55,6 +57,7 @@ public class HSRobot {
   public HSRobot(LinearOpMode _ctxl) throws Exception {
     this.ctxl = _ctxl;
     this.ctx = _ctxl;
+    Ninevolt.setConfig(HSConfig.getInstance());
     hardware = initializeHardware(ctxl.hardwareMap);
     movement = new MecanumMovement(hardware, ctxl, PULSES_PER_INCH);
     elevator = new Elevator(ctx.hardwareMap.dcMotor.get("elevatorMotor"), 8.5, ctxl);

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.functions;
 
+import com.edinaftc.ninevolt.Config;
+import com.edinaftc.ninevolt.Ninevolt;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -86,11 +88,7 @@ public class Elevator {
   }
 
   public boolean isVerbose() {
-    return isVerbose;
-  }
-
-  public void setVerbose(boolean verbose) {
-    isVerbose = verbose;
+    return Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.VERBOSE);
   }
 
   public void resetEncoders() throws Exception {
