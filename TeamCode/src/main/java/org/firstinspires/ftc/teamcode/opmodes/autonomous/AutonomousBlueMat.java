@@ -52,11 +52,9 @@ public class AutonomousBlueMat extends LinearOpMode {
     robot = new HSRobot(this); // Initializes robot
     // Retrieve variables
     movement = robot.getMovement();
-    movement.setVerbose(false);
     gripper = robot.getGripper();
     tollbooth = robot.getTollbooth();
     elevator = robot.getElevator();
-    elevator.setVerbose(false);
     notifier = new StepNotifier(new String[] {
         "Elevator up",
         "Tollbooth lowered",
