@@ -1,13 +1,13 @@
-package org.firstinspires.ftc.teamcode.autonomous.blue;
+package org.firstinspires.ftc.teamcode.opmodes.autonomous.red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import org.firstinspires.ftc.teamcode.autonomous.AutonomousMat;
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.AutonomousMat;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
-@Autonomous(name = "Autonomous Blue Mat Side OOP", group = "real")
+@Autonomous(name = "Autonomous Red Mat Side OOP", group = "real")
 @Disabled
-public class AutonomousMatBlue extends AutonomousMat {
+public class AutonomousMatRed extends AutonomousMat {
   @Override
   protected double getYDist() {
     return -41;
