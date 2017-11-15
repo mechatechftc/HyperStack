@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.util;
 
+import com.edinaftc.ninevolt.Config;
+import com.edinaftc.ninevolt.Ninevolt;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -26,13 +28,19 @@ public class StepNotifier {
 
   public void notifyStep(int step) {
     this.currentStep = step;
-    telemetry.addData("Step",
-        String.format(Locale.US, "%d Done: %s", currentStep, steps[currentStep-1]));
+    if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.VERBOSE)) {
+      telemetry.addData("Step",
+          String.format(Locale.US, "%d Done: %s", currentStep, steps[currentStep - 1]));
+      telemetry.update();
+    }
   }
 
   public void notifyStep() {
     currentStep++;
-    telemetry.addData("Step", String.format(Locale.US, "%d Done: %s", currentStep, steps[currentStep-1]));
+    if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.VERBOSE)) {
+      telemetry.addData("Step", String.format(Locale.US, "%d Done: %s", currentStep, steps[currentStep - 1]));
+      telemetry.update();
+    }
   }
 
 
