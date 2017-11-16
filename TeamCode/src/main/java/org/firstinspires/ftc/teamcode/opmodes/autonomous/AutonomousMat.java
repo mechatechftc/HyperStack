@@ -23,7 +23,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   protected abstract double getYDist();
   protected abstract double getSecondRotationAngle();
   protected abstract Tollbooth.JewelColor getAllianceColor();
-  protected abstract Tollbooth.JewelColor getOppositionColor();
+  protected abstract void realign();
 
   @Override
   public void runOpMode() throws InterruptedException {
@@ -46,7 +46,7 @@ public abstract class AutonomousMat extends LinearOpMode {
       elevator.elevate(4);
       notifier.notifyStep();
       sleep(1000);
-      bumpJewel();                  // Read jewel color and knock appropriately.
+      bumpJewel(getAllianceColor());                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
 //      releaseGlyph();               // Deposit glyph.
 
@@ -83,20 +83,20 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   }
 
-  private void bumpJewel() throws Exception {
+  private void bumpJewel(Tollbooth.JewelColor allianceColor) throws Exception {
     tollbooth.lower(); // Lower tollbooth arm
     notifier.notifyStep();
     sleep(3000);
     Tollbooth.JewelColor color = tollbooth.checkColor();
     notifier.notifyStep();
-    if (color == getOppositionColor()) {
+    if (color == oppositionColor(allianceColor)) {
       movement.rotate(15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
       movement.rotate(-15, 0.2f);
-    } else if (color == getAllianceColor()) {
+    } else if (color == allianceColor) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
@@ -122,6 +122,13 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     gripper.wideRelease();
+  }
+
+  private Tollbooth.JewelColor
+      oppositionColor(Tollbooth.JewelColor allianceColor) {
+    if (allianceColor == Tollbooth.JewelColor.RED) return Tollbooth.JewelColor.BLUE;
+    else if (allianceColor == Tollbooth.JewelColor.BLUE) return Tollbooth.JewelColor.RED;
+    else return null;
   }
 
 }

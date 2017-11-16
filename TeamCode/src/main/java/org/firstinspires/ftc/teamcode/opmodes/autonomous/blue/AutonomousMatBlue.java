@@ -24,7 +24,7 @@ public class AutonomousMatBlue extends AutonomousMat {
   }
 
   @Override
-  protected Tollbooth.JewelColor getOppositionColor() {
-    return Tollbooth.JewelColor.BLUE;
+  protected void realign() {
+
   }
 }
