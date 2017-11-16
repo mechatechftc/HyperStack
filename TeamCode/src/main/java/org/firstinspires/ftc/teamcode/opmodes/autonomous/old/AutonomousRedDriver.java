@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes.autonomous.old;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 @Autonomous(name = "Red Autonomous Driver Box", group = "real")
+@Disabled
 public class AutonomousRedDriver extends LinearOpMode {
 
   private HSRobot robot;
@@ -27,6 +29,8 @@ public class AutonomousRedDriver extends LinearOpMode {
       bumpJewel();
       moveBack();
       dropGlyph();
+    } catch (InterruptedException ie) {
+      throw ie;
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
     }
@@ -51,7 +55,9 @@ public class AutonomousRedDriver extends LinearOpMode {
     }, this);
   }
 
-  private void bumpJewel() throws Exception {
+  private void bumpJewel() throws Exception{
+    gripper.grip();
+    elevator.elevate(5);
     tollbooth.lower(); // Lower tollbooth arm
     notifier.notifyStep();
     sleep(3000);
@@ -74,6 +80,7 @@ public class AutonomousRedDriver extends LinearOpMode {
       telemetry.update();
     }
   }
+
   private void moveBack() {
     try {
       movement.yDrive(-28, 0.2f);
