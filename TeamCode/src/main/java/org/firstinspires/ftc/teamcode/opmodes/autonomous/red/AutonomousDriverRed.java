@@ -7,12 +7,10 @@ import org.firstinspires.ftc.teamcode.opmodes.autonomous.AutonomousDriver;
 @Autonomous(name = "Red Autonomous Driver Side OOP", group  = "real")
 public class AutonomousDriverRed extends AutonomousDriver{
 
-  @Override
   public Tollbooth.JewelColor getAllianceColor() {
     return Tollbooth.JewelColor.RED;
   }
 
-  @Override
   public int getMoveBackDistance() {
     return -28;
   }

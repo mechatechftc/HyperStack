@@ -12,24 +12,24 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 public abstract class AutonomousMat extends LinearOpMode {
-  private HSRobot robot;
-  private Movement movement;
-  private Gripper gripper;
-  private Tollbooth tollbooth;
-  private Elevator elevator;
+  public HSRobot robot;
+  public Movement movement;
+  public Gripper gripper;
+  public Tollbooth tollbooth;
+  public Elevator elevator;
 
   private StepNotifier notifier;
 
-  protected abstract double getYDist();
-  protected abstract double getSecondRotationAngle();
-  protected abstract Tollbooth.JewelColor getAllianceColor();
-  protected abstract void realign();
+  protected abstract void bumpJewel();
 
   @Override
   public void runOpMode() throws InterruptedException {
     try {
       // Initialize robot and variables
       customInit();
+      bumpJewel();
+      moveToGlyphBox();
+      releaseGlyph();
       // Alert user that initialization was successful
 
       if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.RECOMMENDED)) {
@@ -46,9 +46,8 @@ public abstract class AutonomousMat extends LinearOpMode {
       elevator.elevate(4);
       notifier.notifyStep();
       sleep(1000);
-      bumpJewel(getAllianceColor());                  // Read jewel color and knock appropriately.
       moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
-//      releaseGlyph();               // Deposit glyph.
+      releaseGlyph();               // Deposit glyph.
 
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
@@ -80,55 +79,30 @@ public abstract class AutonomousMat extends LinearOpMode {
       telemetry.update();
       idle();
     }
-
   }
 
-  private void bumpJewel(Tollbooth.JewelColor allianceColor) throws Exception {
-    tollbooth.lower(); // Lower tollbooth arm
-    notifier.notifyStep();
-    sleep(3000);
-    Tollbooth.JewelColor color = tollbooth.checkColor();
-    notifier.notifyStep();
-    if (color == oppositionColor(allianceColor)) {
-      movement.rotate(15, 0.2f);
-      notifier.notifyStep();
-      sleep(3000);
-      tollbooth.raise();
-      sleep(3000);
-      movement.rotate(-15, 0.2f);
-    } else if (color == allianceColor) {
-      movement.rotate(-15, 0.2f);
-      notifier.notifyStep();
-      sleep(3000);
-      tollbooth.raise();
-      sleep(3000);
-      movement.rotate(15, 0.2f);
-    } else {
-      telemetry.addLine("Error with color sensor readings");
-      telemetry.update();
-    }
-  }
-
-  private void moveToGlyphBox() throws Exception {
-    sleep(250);
-    movement.yDrive(getYDist(), 0.5f);
-    sleep(1000);
-    movement.directDrive(0f,0f,0f);
+  protected void moveToGlyphBox() {
+    try {
+      sleep(250);
+      movement.yDrive(-36, 0.5f);
+      sleep(1000);
+      movement.directDrive(0f, 0f, 0f);
     /*sleep(500);
-    movement.rotate(getSecondRotationDistance(), 0.2f);
+    movement.rotate(-90, 0.2f);
     sleep(1000);
     movement.yDrive(12.0, 0.2f);*/
+    }
+    catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
+    }
   }
-
   private void releaseGlyph() {
-    gripper.wideRelease();
+    try {
+      elevator.elevate(-3);
+      gripper.wideRelease();
+    }
+    catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
+    }
   }
-
-  private Tollbooth.JewelColor
-      oppositionColor(Tollbooth.JewelColor allianceColor) {
-    if (allianceColor == Tollbooth.JewelColor.RED) return Tollbooth.JewelColor.BLUE;
-    else if (allianceColor == Tollbooth.JewelColor.BLUE) return Tollbooth.JewelColor.RED;
-    else return null;
-  }
-
 }
