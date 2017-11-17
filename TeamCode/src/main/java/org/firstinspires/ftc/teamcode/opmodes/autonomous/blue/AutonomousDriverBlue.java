@@ -13,10 +13,6 @@ public class AutonomousDriverBlue extends AutonomousDriver{
   }
 
   @Override
-  public Tollbooth.JewelColor getOpponentColor() {
-    return Tollbooth.JewelColor.RED;
-  }
-  @Override
   public int getMoveBackDistance() {return 28;}
 
 }

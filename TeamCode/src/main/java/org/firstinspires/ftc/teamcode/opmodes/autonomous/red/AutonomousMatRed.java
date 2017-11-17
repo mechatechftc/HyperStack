@@ -6,7 +6,6 @@ import org.firstinspires.ftc.teamcode.opmodes.autonomous.AutonomousMat;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
 @Autonomous(name = "Autonomous Red Mat Side OOP", group = "real")
-@Disabled
 public class AutonomousMatRed extends AutonomousMat {
   @Override
   protected double getYDist() {

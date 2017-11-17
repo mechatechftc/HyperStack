@@ -19,14 +19,13 @@ abstract public class AutonomousDriver extends LinearOpMode{
   private StepNotifier notifier;
 
   public abstract Tollbooth.JewelColor getAllianceColor();
-  public abstract Tollbooth.JewelColor getOpponentColor();
   public abstract int getMoveBackDistance();
 
   @Override
   public void runOpMode() throws InterruptedException {
     try {
       customInit();
-      bumpJewel(getAllianceColor(), getOpponentColor());
+      bumpJewel(getAllianceColor());
       moveBack(getMoveBackDistance());
       dropGlyph();
     }
@@ -56,8 +55,13 @@ abstract public class AutonomousDriver extends LinearOpMode{
     }, this);
   }
 
-  private void bumpJewel (Tollbooth.JewelColor getAllianceColor,
-                          Tollbooth.JewelColor getOpponentColor) throws Exception{
+  private Tollbooth.JewelColor oppositionColor(Tollbooth.JewelColor allianceColor) {
+    if (allianceColor == Tollbooth.JewelColor.RED) return Tollbooth.JewelColor.BLUE;
+    else if (allianceColor == Tollbooth.JewelColor.BLUE) return Tollbooth.JewelColor.RED;
+    else return null;
+  }
+
+  private void bumpJewel (Tollbooth.JewelColor getAllianceColor) throws Exception{
 
     gripper.grip();
     elevator.elevate(5);
@@ -67,12 +71,13 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
     Tollbooth.JewelColor color = tollbooth.checkColor();
     notifier.notifyStep();
-    if (color == getOpponentColor) {
+    if (color == oppositionColor(getAllianceColor)) {
       movement.rotate(15, 0.2f);
       notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
+
 
     } else if (color == getAllianceColor) {
       movement.rotate(-15, 0.2f);
