@@ -12,15 +12,16 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 public abstract class AutonomousMat extends LinearOpMode {
-  public HSRobot robot;
-  public Movement movement;
-  public Gripper gripper;
-  public Tollbooth tollbooth;
-  public Elevator elevator;
+  protected HSRobot robot;
+  protected Movement movement;
+  protected Gripper gripper;
+  protected Tollbooth tollbooth;
+  protected Elevator elevator;
 
   private StepNotifier notifier;
 
   protected abstract void bumpJewel();
+  protected abstract double getYDist();
 
   @Override
   public void runOpMode() throws InterruptedException {
@@ -84,9 +85,9 @@ public abstract class AutonomousMat extends LinearOpMode {
   protected void moveToGlyphBox() {
     try {
       sleep(250);
-      movement.yDrive(-36, 0.5f);
+      movement.yDrive(getYDist(), 0.5f);
       sleep(1000);
-      movement.directDrive(0f, 0f, 0f);
+      movement.setPowerZero();
     /*sleep(500);
     movement.rotate(-90, 0.2f);
     sleep(1000);

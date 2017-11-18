@@ -7,6 +7,8 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 @Autonomous(name = "Autonomous Blue Mat Side OOP", group = "real")
 public class AutonomousMatBlue extends AutonomousMat {
 
+
+
   protected void bumpJewel() {
     tollbooth.lower(); // Lower tollbooth arm
     // notifier.notifyStep();
@@ -30,5 +32,10 @@ public class AutonomousMatBlue extends AutonomousMat {
       telemetry.addData("ColorSensor", "Error with color sensor readings");
       telemetry.update();
     }
+  }
+
+  @Override
+  protected double getYDist() {
+    return 36;
   }
 }

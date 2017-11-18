@@ -32,4 +32,9 @@ public class AutonomousMatRed extends AutonomousMat {
       telemetry.update();
     }
   }
+
+  @Override
+  protected double getYDist() {
+    return -36;
+  }
 }
