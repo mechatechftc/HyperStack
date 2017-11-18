@@ -57,7 +57,9 @@ public class Gripper {
   }
 
   public void lightRelease() {
-    setPosition(midPosition);
+    bigServo.setPosition(midPosition);
+    bottomServo.setPosition(midPosition);
+    topServo.setPosition(0.55);
     gripping = false;
     updateTelemetry();
   }
