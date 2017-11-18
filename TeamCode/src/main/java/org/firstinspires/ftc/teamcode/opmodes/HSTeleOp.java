@@ -120,7 +120,7 @@ public class HSTeleOp extends OpMode {
 
   public void moveElevator() {
     if(gamepad2.dpad_up) {
-      elevator.directDrive(0.8f);
+      elevator.directDrive(0.75f);
     } else if (gamepad2.dpad_down) {
       elevator.directDrive(-0.2f);
     } else {
