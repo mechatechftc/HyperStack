@@ -82,11 +82,22 @@ public class HSTeleOp extends OpMode {
   }
 
   public void drive(float gearRatio) {
-    movement.directDrive(
-            gamepad1.left_stick_x * gearRatio,
-            (-gamepad1.left_stick_y) * gearRatio,
-            gamepad1.right_stick_x * gearRatio
-    );
+    if(gamepad1.left_stick_y != 0) {
+      movement.directDrive(
+          0,
+          (-gamepad1.left_stick_y) * gearRatio,
+          gamepad1.right_stick_x * gearRatio
+      );
+    } else if(gamepad1.left_stick_x != 0) {
+      movement.directDrive(
+          0,
+          (-gamepad1.left_stick_y) * gearRatio,
+          gamepad1.right_stick_x * gearRatio
+      );
+    } else {
+      movement.directDrive(0, 0, gamepad1.right_stick_x * gearRatio);
+    }
+
   }
 
   public void grip() {
