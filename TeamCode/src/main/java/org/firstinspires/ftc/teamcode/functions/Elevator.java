@@ -98,7 +98,7 @@ public class Elevator {
     motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     ctxl.idle();
 
-    while (motor.getCurrentPosition() != 0) {
+    while (motor.getCurrentPosition() != 0 && ctxl.opModeIsActive()) {
       ctxl.sleep(500);
     }
 
