@@ -3,9 +3,11 @@ package org.firstinspires.ftc.teamcode.test;
 import com.edinaftc.ninevolt.core.hw.Hardware;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.HSRobot;
 
+@Autonomous(name = "Test the Rotation", group = "test")
 public class TestRotate extends LinearOpMode {
 
   private HSRobot robot;
@@ -23,7 +25,9 @@ public class TestRotate extends LinearOpMode {
       this.movement = robot.getMovement();
       waitForStart();
       movement.rotate(90, power);
+      sleep(1000);
       movement.yDrive(20, power);
+      sleep(1000);
       rotateLoop();
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
@@ -37,7 +41,9 @@ public class TestRotate extends LinearOpMode {
         break;
       }
       movement.rotate(i, power);
+      sleep(100);
       movement.rotate(-i-1, power);
+      sleep(100);
       idle();
     }
     requestOpModeStop();
