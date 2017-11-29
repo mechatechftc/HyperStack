@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.autonomous;
+package org.firstinspires.ftc.teamcode.opmodes.autonomous.base;
 
 import com.edinaftc.ninevolt.Config;
 import com.edinaftc.ninevolt.Ninevolt;

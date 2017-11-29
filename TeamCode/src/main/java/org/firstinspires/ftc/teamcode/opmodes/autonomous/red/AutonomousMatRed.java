@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import org.firstinspires.ftc.teamcode.opmodes.autonomous.AutonomousMat;
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousMat;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
 @Autonomous(name = "Autonomous Red Mat Side OOP", group = "real")
