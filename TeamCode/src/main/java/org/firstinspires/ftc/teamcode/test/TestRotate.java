@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.test;
 
+import com.edinaftc.ninevolt.core.hw.Hardware;
+import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
+import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.HSRobot;
 
@@ -14,24 +17,29 @@ public class TestRotate extends LinearOpMode {
   @Override
   public void runOpMode() throws InterruptedException {
 
-    this.robot = new HSRobot(this);
-    this.hardware = robot.getHardware();
-    this.movement = robot.getMovement();
-    waitForStart();
-    movement.rotate(90, power);
-    movement.yDrive(20, power);
-    rotateLoop();
+    try {
+      this.robot = new HSRobot(this);
+      this.hardware = robot.getHardware();
+      this.movement = robot.getMovement();
+      waitForStart();
+      movement.rotate(90, power);
+      movement.yDrive(20, power);
+      rotateLoop();
+    } catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
+    }
+
   }
 
   private void rotateLoop() {
     for (int i = 1; i < 45; i++) {
       if (!opModeIsActive()) {
-        exit();
+        break;
       }
       movement.rotate(i, power);
       movement.rotate(-i-1, power);
       idle();
     }
-    exit();
+    requestOpModeStop();
   }
 }
