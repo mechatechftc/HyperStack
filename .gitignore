@@ -27,3 +27,5 @@ build/
 *ASUS_PC_01*
 
 gradle.properties
+
+bash.exe.stackdump
