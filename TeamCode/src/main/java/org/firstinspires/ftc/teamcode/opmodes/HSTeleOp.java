@@ -91,10 +91,10 @@ public class HSTeleOp extends OpMode {
     }
 
     if (gamepad1.right_trigger != 0){
-      movement.directDrive(0,  gamepad1.right_trigger * gearRatio, 0);
+      movement.directDrive(0, 0,  gamepad1.right_trigger * gearRatio);
     }
     else if (gamepad1.left_trigger != 0) {
-      movement.directDrive(0,  gamepad1.left_trigger * gearRatio, 0);
+      movement.directDrive(0, 0,  gamepad1.left_trigger * gearRatio);
     }
 
     if (gamepad1.left_stick_x != 0) {
