@@ -24,6 +24,8 @@ public class TestRotate extends LinearOpMode {
       this.hardware = robot.getHardware();
       this.movement = robot.getMovement();
       waitForStart();
+      movement.rotate(-180, power);
+      sleep(1000);
       movement.rotate(90, power);
       sleep(1000);
       movement.yDrive(20, power);

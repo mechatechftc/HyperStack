@@ -82,73 +82,79 @@ public class HSTeleOp extends OpMode {
   }
 
   public void drive(float gearRatio) {
-    if(gamepad1.left_stick_y != 0) {
+    if (gamepad1.right_stick_y != 0) {
       movement.directDrive(
           0,
-          (-gamepad1.left_stick_y) * gearRatio,
-          gamepad1.right_stick_x * gearRatio
-      );
-    } else if(gamepad1.left_stick_x != 0) {
-      movement.directDrive(
-          0,
-          (-gamepad1.left_stick_y) * gearRatio,
-          gamepad1.right_stick_x * gearRatio
+          (-gamepad1.right_stick_y) * gearRatio,
+          gamepad1.left_stick_x * gearRatio
       );
     } else {
       movement.directDrive(0, 0, gamepad1.right_stick_x * gearRatio);
     }
 
-  }
-
-  public void grip() {
-    if (gamepad2.right_trigger > 0.8) {
-      gripper.grip();
-    } else if (gamepad2.right_bumper) {
-      gripper.lightRelease();
+    if (gamepad1.left_trigger != 0) {
+      movement.directDrive(
+          0,
+          gamepad1.left_trigger * gearRatio
+      );
     }
-    else if (gamepad2.left_trigger > 0.8) {
-      gripper.bottomGrip();
-    }
-    else {
-      if (!gripperLock) { gripper.wideRelease(); }
+    if (gamepad1.left_trigger != 0) {
+      movement.directDrive(
+          0,
+          -gamepad1.left_trigger * gearRatio
+      );
     }
   }
 
-  public float softGear() {
-    if (gamepad1.right_trigger > 0.8) {
-      return 0.5f;
-    } else {
-      return 1f;
-    }
-  }
+      public void grip() {
+        if (gamepad2.right_trigger > 0.8) {
+          gripper.grip();
+        } else if (gamepad2.right_bumper) {
+          gripper.lightRelease();
+        }
+        else if (gamepad2.left_trigger > 0.8) {
+          gripper.bottomGrip();
+        }
+        else {
+          if (!gripperLock) { gripper.wideRelease(); }
+        }
+      }
 
-  public void gripLock() {
-    if (gamepad2.right_trigger > 0.8 && gamepad2.a) {
-      if (!gripperLock) { gripperLock = true; }
-      else { gripperLock = false; }
-    }
-  }
+      public float softGear() {
+        if (gamepad1.right_trigger > 0.8) {
+          return 0.5f;
+        } else {
+          return 1f;
+        }
+      }
 
-  public void moveElevator() {
-    if(gamepad2.dpad_up) {
-      elevator.directDrive(0.75f);
-    } else if (gamepad2.dpad_down) {
-      elevator.directDrive(-0.2f);
-    } else {
-      elevator.stop();
-    }
-  }
+      public void gripLock() {
+        if (gamepad2.right_trigger > 0.8 && gamepad2.a) {
+          if (!gripperLock) { gripperLock = true; }
+          else { gripperLock = false; }
+        }
+      }
 
-  public void blockNotify(double rt) {
-    telemetry.addData("Block", block);
-    gripper.updateTelemetry();
-    if (rt - lastBlockUpdateTime > 10 && block < 12) {
-      block++;
-      lastBlockUpdateTime =  rt;
+      public void moveElevator() throws Exception{
+        if(gamepad2.dpad_up) {
+          elevator.elevate(0.75f);
+        } else if (gamepad2.dpad_down) {
+          elevator.elevate(-0.2f);
+        } else {
+          elevator.stop();
+        }
+      }
+
+      public void blockNotify(double rt) {
+        telemetry.addData("Block", block);
+        gripper.updateTelemetry();
+        if (rt - lastBlockUpdateTime > 10 && block < 12) {
+          block++;
+          lastBlockUpdateTime =  rt;
+        }
+        if(rt > 90) {
+          telemetry.addLine("End Game");
+        }
+        telemetry.update();
+      }
     }
-    if(rt > 90) {
-      telemetry.addLine("End Game");
-    }
-    telemetry.update();
-  }
-}
