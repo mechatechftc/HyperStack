@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
 @Autonomous(name = "Test Tollbooth", group = "test")
+@Disabled
 public class TestTollbooth extends LinearOpMode {
 
   @Override

@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 
 @Autonomous(name = "Test Elevator Encoders", group = "test")
+@Disabled
 public class TestElevatorV2 extends LinearOpMode {
   private Elevator elevator;
 

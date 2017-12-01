@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.test;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.edinaftc.ninevolt.core.hw.Hardware;
@@ -15,6 +16,7 @@ import com.edinaftc.ninevolt.util.ExceptionHandling;
  */
 
 @Autonomous(name = "Test the Autonomous", group = "test")
+@Disabled
 public class TestAutonomous extends LinearOpMode {
   private static final int PULSES_PER_MOTOR_REV = 28;
   private static final double DRIVE_GEAR_REDUCTION = 40.0;

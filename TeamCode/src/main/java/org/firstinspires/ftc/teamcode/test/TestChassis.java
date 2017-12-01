@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.test;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,6 +13,7 @@ import com.edinaftc.ninevolt.util.ExceptionHandling;
  * Created by Richik SC on 9/16/2017.
  */
 @TeleOp(name = "Test the Chassis", group = "test")
+@Disabled
 public class TestChassis extends OpMode {
   private Hardware hw;
   private Movement movement;
