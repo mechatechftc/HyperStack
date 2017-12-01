@@ -86,22 +86,27 @@ public class HSTeleOp extends OpMode {
       movement.directDrive(
           0,
           (-gamepad1.right_stick_y) * gearRatio,
-          gamepad1.left_stick_x * gearRatio
+          0
       );
-    } else {
-      movement.directDrive(0, 0, gamepad1.right_stick_x * gearRatio);
     }
 
-    if (gamepad1.left_trigger != 0) {
+    if (gamepad1.right_trigger != 0){
+      movement.directDrive(0,  gamepad1.right_trigger * gearRatio, 0);
+    }
+    else if (gamepad1.left_trigger != 0) {
+      movement.directDrive(0,  gamepad1.left_trigger * gearRatio, 0);
+    }
+
+    if (gamepad1.left_stick_x != 0) {
       movement.directDrive(
           0,
-          gamepad1.left_trigger * gearRatio
+          gamepad1.left_stick_x * gearRatio
       );
     }
-    if (gamepad1.left_trigger != 0) {
+    if (gamepad1.left_stick_x != 0) {
       movement.directDrive(
           0,
-          -gamepad1.left_trigger * gearRatio
+          -gamepad1.left_stick_x * gearRatio
       );
     }
   }
@@ -121,7 +126,7 @@ public class HSTeleOp extends OpMode {
       }
 
       public float softGear() {
-        if (gamepad1.right_trigger > 0.8) {
+        if (gamepad1.right_bumper) {
           return 0.5f;
         } else {
           return 1f;
@@ -135,11 +140,11 @@ public class HSTeleOp extends OpMode {
         }
       }
 
-      public void moveElevator() throws Exception{
+      public void moveElevator() {
         if(gamepad2.dpad_up) {
-          elevator.elevate(0.75f);
+          elevator.directDrive(0.75f);
         } else if (gamepad2.dpad_down) {
-          elevator.elevate(-0.2f);
+          elevator.directDrive(-0.25f);
         } else {
           elevator.stop();
         }
