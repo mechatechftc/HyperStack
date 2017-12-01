@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.HSRobot;
 
 @Autonomous(name = "Test the Rotation", group = "test")
-@Disabled
 public class TestRotate extends LinearOpMode {
 
   private HSRobot robot;
