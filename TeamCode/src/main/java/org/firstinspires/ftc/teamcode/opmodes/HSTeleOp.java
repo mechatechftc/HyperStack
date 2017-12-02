@@ -79,7 +79,7 @@ public class HSTeleOp extends OpMode {
     if (gamepad1.left_trigger != 0) {
       movement.directDrive(-gamepad1.left_trigger * gearRatio, 0, 0);
     } else if (gamepad1.right_trigger != 0) {
-      movement.directDrive(gamepad1.left_trigger * gearRatio, 0, 0);
+      movement.directDrive(gamepad1.right_trigger * gearRatio, 0, 0);
     } else {
       movement.directDrive(
         0,
