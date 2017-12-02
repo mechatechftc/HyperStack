@@ -35,7 +35,6 @@ public class HSTeleOp extends OpMode {
       elevator = robot.getElevator();
 
       movement.setRunUsingEncoders(true);
-      movement.setVerbose(true);
 
       // Alert user that initialization was successful
       telemetry.addData("Initialization", "Done!");
@@ -83,8 +82,8 @@ public class HSTeleOp extends OpMode {
     } else {
       movement.directDrive(
         0,
-        -gamepad1.right_stick_y * gearRatio,
-        gamepad1.left_stick_x * gearRatio
+        -gamepad1.left_stick_y * gearRatio,
+        gamepad1.right_stick_x * gearRatio
       );
     }
   }
