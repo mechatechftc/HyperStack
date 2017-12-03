@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.test;
 // Testing the rotation
 import com.edinaftc.ninevolt.core.hw.Hardware;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
+import com.edinaftc.ninevolt.core.hw.drivetrain.WheelValues;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.HSRobot;
@@ -24,30 +26,17 @@ public class TestRotate extends LinearOpMode {
       this.hardware = robot.getHardware();
       this.movement = robot.getMovement();
       waitForStart();
-      movement.rotate(-180, power);
-      sleep(1000);
-      movement.rotate(90, power);
-      sleep(1000);
+
+      movement.rotate(-15, power);
+      sleep(500);
+      movement.rotate(15, power);
+      sleep(500);
       movement.yDrive(20, power);
       sleep(1000);
-      rotateLoop();
+      movement.rotate(90, power);
     } catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
     }
 
-  }
-
-  private void rotateLoop() {
-    for (int i = 1; i < 45; i++) {
-      if (!opModeIsActive()) {
-        break;
-      }
-      movement.rotate(i, power);
-      sleep(100);
-      movement.rotate(-i-1, power);
-      sleep(100);
-      idle();
-    }
-    requestOpModeStop();
   }
 }
