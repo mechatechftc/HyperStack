@@ -52,6 +52,7 @@ public class HSRobot {
     elevator = new Elevator(ctx.hardwareMap.dcMotor.get("elevatorMotor"), ctx);
     tollbooth = initializeTollbooth(ctx);
     movement = new MecanumMovement(hardware, ctx);
+    movement.setDefaultRunUsingEncoders(true);
   }
 
   public HSRobot(LinearOpMode _ctxl) throws Exception {
@@ -60,6 +61,7 @@ public class HSRobot {
     Ninevolt.setConfig(HSConfig.getInstance());
     hardware = initializeHardware(ctxl.hardwareMap);
     movement = new MecanumMovement(hardware, ctxl, PULSES_PER_INCH);
+    movement.setDefaultRunUsingEncoders(true);
     elevator = new Elevator(ctx.hardwareMap.dcMotor.get("elevatorMotor"), 8.5, ctxl);
     tollbooth = initializeTollbooth(ctx);
     gripper = new Gripper("bigServo", "bottomServo", "topServo", ctxl);
