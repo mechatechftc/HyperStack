@@ -141,7 +141,7 @@ public abstract class AutonomousMat extends LinearOpMode {
       sleep(500);
       elevator.elevate(3);
       sleep(500);
-      movement.yDrive(-10, 0.5f);
+      movement.yDrive(-4, 0.5f);
       sleep(1000);
     }
     catch (Exception e) {
