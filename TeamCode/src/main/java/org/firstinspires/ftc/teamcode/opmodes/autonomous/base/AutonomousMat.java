@@ -29,11 +29,8 @@ public abstract class AutonomousMat extends LinearOpMode {
     try {
       // Initialize robot and variables
       customInit();
-      bumpJewel(getAllianceColor());
-      moveToGlyphBox();
-      releaseGlyph();
-      // Alert user that initialization was successful
 
+      // Alert user that initialization was successful
       if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.RECOMMENDED)) {
         telemetry.addData("Initialization", "Done!");
         telemetry.update();
@@ -45,12 +42,13 @@ public abstract class AutonomousMat extends LinearOpMode {
 
       // Perform autonomous
       gripper.grip();
+      sleep(500);
       elevator.elevate(4);
       notifier.notifyStep();
       sleep(1000);
-      moveToGlyphBox();             // Move to cryptoboxes to deposit glyph.
-      releaseGlyph();               // Deposit glyph.
-
+      bumpJewel(getAllianceColor());
+      moveToGlyphBox();
+      releaseGlyph();
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
       ExceptionHandling.standardExceptionHandling(e, this);
@@ -64,19 +62,19 @@ public abstract class AutonomousMat extends LinearOpMode {
     Tollbooth.JewelColor color = tollbooth.checkColor();
     // notifier.notifyStep();
     if (color == allianceColor) {
-      movement.rotate(15, 0.2f);
-      // notifier.notifyStep();
-      sleep(3000);
-      tollbooth.raise();
-      sleep(3000);
-      movement.rotate(15, 0.2f);
-    } else if (color == getOppositionColor(allianceColor)) {
       movement.rotate(-15, 0.2f);
       // notifier.notifyStep();
       sleep(3000);
       tollbooth.raise();
       sleep(3000);
       movement.rotate(15, 0.2f);
+    } else if (color == getOppositionColor(allianceColor)) {
+      movement.rotate(15, 0.2f);
+      // notifier.notifyStep();
+      sleep(3000);
+      tollbooth.raise();
+      sleep(3000);
+      movement.rotate(-15, 0.2f);
     } else {
       telemetry.addData("ColorSensor", "Error with color sensor readings");
       telemetry.update();
@@ -125,6 +123,8 @@ public abstract class AutonomousMat extends LinearOpMode {
       sleep(1000);
       movement.rotate(getRotationAngle(), 0.5f);
       sleep(1000);
+      elevator.elevate(-2);
+      sleep(1000);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
@@ -133,8 +133,16 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     try {
-      elevator.elevate(-3);
+      movement.yDrive(10, 0.5f);
+      sleep(1000);
+      elevator.elevate(-1);
+      sleep(1000);
       gripper.wideRelease();
+      sleep(500);
+      elevator.elevate(3);
+      sleep(500);
+      movement.yDrive(-10, 0.5f);
+      sleep(1000);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
