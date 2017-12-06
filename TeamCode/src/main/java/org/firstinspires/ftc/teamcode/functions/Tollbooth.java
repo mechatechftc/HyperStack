@@ -17,7 +17,7 @@ public class Tollbooth {
   private ColorSensor colorSensor;
 
   private double raisedPosition = 0.25;
-  private double loweredPosition = 0.78;
+  private double loweredPosition = 0.82;
 
   public enum JewelColor {
     RED, BLUE, INDETERMINATE
