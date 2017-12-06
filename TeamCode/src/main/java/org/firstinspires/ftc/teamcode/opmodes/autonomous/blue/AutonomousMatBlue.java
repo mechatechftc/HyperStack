@@ -13,7 +13,7 @@ public class AutonomousMatBlue extends AutonomousMat {
 
   @Override
   protected double getYDist() {
-    return 34;
+    return 34.5;
   }
 
   @Override
