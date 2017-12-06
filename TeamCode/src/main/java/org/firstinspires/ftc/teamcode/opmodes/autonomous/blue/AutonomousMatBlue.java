@@ -6,36 +6,18 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
 @Autonomous(name = "Autonomous Blue Mat Side OOP", group = "real")
 public class AutonomousMatBlue extends AutonomousMat {
-
-
-
-  protected void bumpJewel() {
-    tollbooth.lower(); // Lower tollbooth arm
-    // notifier.notifyStep();
-    sleep(3000);
-    Tollbooth.JewelColor color = tollbooth.checkColor();
-    // notifier.notifyStep();
-    if (color == Tollbooth.JewelColor.RED) {
-      movement.rotate(15, 0.2f);
-      // notifier.notifyStep();
-      sleep(3000);
-      tollbooth.raise();
-      sleep(3000);
-      movement.rotate(-45, 0.2f);
-    } else if (color == Tollbooth.JewelColor.BLUE) {
-      movement.rotate(-30, 0.2f);
-      // notifier.notifyStep();
-      sleep(3000);
-      tollbooth.raise();
-      sleep(3000);
-    } else {
-      telemetry.addData("ColorSensor", "Error with color sensor readings");
-      telemetry.update();
-    }
+  @Override
+  protected Tollbooth.JewelColor getAllianceColor() {
+    return Tollbooth.JewelColor.BLUE;
   }
 
   @Override
   protected double getYDist() {
     return 36;
+  }
+
+  @Override
+  protected double getRotationAngle() {
+    return -90;
   }
 }
