@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousDriver;
 
 @Autonomous(name = "Red Autonomous Driver Side OOP", group  = "real")
+@Disabled
 public class AutonomousDriverRed extends AutonomousDriver{
 
   public Tollbooth.JewelColor getAllianceColor() {
