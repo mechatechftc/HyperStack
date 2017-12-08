@@ -12,22 +12,25 @@ import org.firstinspires.ftc.teamcode.util.StepNotifier;
 abstract public class AutonomousDriver extends LinearOpMode{
 
   private HSRobot robot;
-  private Movement movement;
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
   private StepNotifier notifier;
 
+  public Movement movement;
+  public float power = 0.5f;
+
   public abstract Tollbooth.JewelColor getAllianceColor();
-  public abstract int getMoveBackDistance();
+  public abstract void moveToGlyphBox();
 
   @Override
   public void runOpMode() throws InterruptedException {
     try {
       customInit();
+      waitForStart();
       bumpJewel(getAllianceColor());
-      moveBack(getMoveBackDistance());
-      dropGlyph();
+      moveToGlyphBox();
+      releaseGlyph();
     }
     catch(InterruptedException ie) {
       throw ie;
@@ -37,7 +40,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     }
   }
 
-  private void customInit() throws Exception{
+  private void customInit() throws Exception {
     robot = new HSRobot(this);
     this.movement = robot.getMovement();
     this.gripper = robot.getGripper();
@@ -61,7 +64,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     else return null;
   }
 
-  private void bumpJewel (Tollbooth.JewelColor getAllianceColor) throws Exception{
+  private void bumpJewel (Tollbooth.JewelColor allianceColor) throws Exception{
 
     gripper.grip();
     elevator.elevate(5);
@@ -71,34 +74,41 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
     Tollbooth.JewelColor color = tollbooth.checkColor();
     notifier.notifyStep();
-    if (color == oppositionColor(getAllianceColor)) {
-      movement.rotate(15, 0.2f);
-      notifier.notifyStep();
-      sleep(3000);
-      tollbooth.raise();
-      sleep(3000);
-
-
-    } else if (color == getAllianceColor) {
+    if (color == allianceColor) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
-      sleep(3000);
+      sleep(1000);
       tollbooth.raise();
-      sleep(3000);
-
+      sleep(1000);
+      movement.rotate(15, 0.2f);
+      sleep(1000);
+    } else if (color == oppositionColor(allianceColor)) {
+      movement.rotate(15, 0.2f);
+      notifier.notifyStep();
+      sleep(1000);
+      tollbooth.raise();
+      sleep(1000);
+      movement.rotate(15, 0.2f);
+      sleep(1000);
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
     }
   }
 
-  private void moveBack(int getMoveBackDistance) throws Exception{
-    movement.yDrive(getMoveBackDistance, 0.2f);
+  private void releaseGlyph() {
+    try {
+      elevator.elevate(-1);
+      sleep(1000);
+      gripper.wideRelease();
+      sleep(500);
+      elevator.elevate(3);
+      sleep(500);
+      movement.yDrive(-4, 0.5f);
+      sleep(1000);
+    }
+    catch (Exception e) {
+      ExceptionHandling.standardExceptionHandling(e, this);
+    }
   }
-
-  private void dropGlyph() throws Exception{
-    elevator.elevate(-5);
-    gripper.wideRelease();
-  }
-
 }
