@@ -67,6 +67,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
   private void bumpJewel (Tollbooth.JewelColor allianceColor) throws Exception{
 
     gripper.grip();
+    sleep(500);
     elevator.elevate(5);
     tollbooth.lower(); // Lower tollbooth arm
     notifier.notifyStep();
@@ -88,7 +89,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
       sleep(1000);
       tollbooth.raise();
       sleep(1000);
-      movement.rotate(15, 0.2f);
+      movement.rotate(-15, 0.2f);
       sleep(1000);
     } else {
       telemetry.addLine("Error with color sensor readings");
