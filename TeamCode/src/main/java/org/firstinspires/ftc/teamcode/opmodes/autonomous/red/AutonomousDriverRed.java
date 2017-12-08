@@ -18,11 +18,7 @@ public class AutonomousDriverRed extends AutonomousDriver {
       sleep(500);
       movement.rotate(180, power);
       sleep(500);
-      movement.rotate(-90, power);
-      sleep(500);
-      movement.yDrive(3, power);
-      sleep(500);
-      movement.rotate(90, power);
+      movement.xDrive(4, power);
       sleep(500);
       movement.yDrive(5, power);
       sleep(500);
