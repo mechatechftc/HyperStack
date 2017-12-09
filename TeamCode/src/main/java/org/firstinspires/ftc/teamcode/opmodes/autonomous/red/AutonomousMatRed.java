@@ -18,6 +18,6 @@ public class AutonomousMatRed extends AutonomousMat {
 
   @Override
   protected double getRotationAngle() {
-    return 85;
+    return -85;
   }
 }
