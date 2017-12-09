@@ -64,16 +64,16 @@ public abstract class AutonomousMat extends LinearOpMode {
     if (color == allianceColor) {
       movement.rotate(-15, 0.2f);
       // notifier.notifyStep();
-      sleep(3000);
+      sleep(1000);
       tollbooth.raise();
-      sleep(3000);
+      sleep(1000);
       movement.rotate(15, 0.2f);
     } else if (color == getOppositionColor(allianceColor)) {
       movement.rotate(15, 0.2f);
       // notifier.notifyStep();
-      sleep(3000);
+      sleep(1000);
       tollbooth.raise();
-      sleep(3000);
+      sleep(1000);
       movement.rotate(-15, 0.2f);
     } else {
       telemetry.addData("ColorSensor", "Error with color sensor readings");
@@ -134,15 +134,15 @@ public abstract class AutonomousMat extends LinearOpMode {
   private void releaseGlyph() {
     try {
       movement.yDrive(10, 0.5f);
-      sleep(1000);
+      sleep(500);
       elevator.elevate(-1);
-      sleep(1000);
+      sleep(500);
       gripper.wideRelease();
       sleep(500);
       elevator.elevate(3);
       sleep(500);
       movement.yDrive(-4, 0.5f);
-      sleep(1000);
+      sleep(500);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
