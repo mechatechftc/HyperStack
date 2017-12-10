@@ -10,4 +10,8 @@ public class HSConfig extends Config {
   private HSConfig() {
     setLoggingLevel(LoggingLevel.RECOMMENDED);
   }
+
+  public String getVuKey() {
+    return ""; // TODO: 12/10/2017 ADD Vuforia Key
+  }
 }

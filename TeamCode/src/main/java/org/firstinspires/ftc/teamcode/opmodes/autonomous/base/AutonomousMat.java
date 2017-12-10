@@ -5,6 +5,12 @@ import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.HSConfig;
 import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
@@ -19,6 +25,9 @@ public abstract class AutonomousMat extends LinearOpMode {
   protected Elevator elevator;
 
   private StepNotifier notifier;
+  private double x;
+  private VuforiaLocalizer vuforia;
+  private VuforiaTrackable relicTemplate;
 
   protected abstract Tollbooth.JewelColor getAllianceColor();
   protected abstract double getYDist();
@@ -47,12 +56,22 @@ public abstract class AutonomousMat extends LinearOpMode {
       notifier.notifyStep();
       sleep(1000);
       bumpJewel(getAllianceColor());
-      moveToGlyphBox();
+      moveToPictograph();
+      moveToGlyphBox(readPictograph());
       releaseGlyph();
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
       ExceptionHandling.standardExceptionHandling(e, this);
     }
+  }
+
+  private RelicRecoveryVuMark readPictograph() {
+    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+    return vuMark;
+  }
+
+  private void moveToPictograph() throws Exception {
+    movement.yDrive(x, 0.5f);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
@@ -89,6 +108,21 @@ public abstract class AutonomousMat extends LinearOpMode {
     tollbooth = robot.getTollbooth();
     elevator = robot.getElevator();
 
+    // vuforia
+    int cameraMonitorViewId = hardwareMap.appContext.getResources()
+        .getIdentifier(
+            "cameraMonitorViewId",
+            "id",
+            hardwareMap.appContext.getPackageName()
+        );
+    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+    parameters.vuforiaLicenseKey = HSConfig.getInstance().getVuKey();
+    parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+
+    vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+    VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
+    relicTemplate = relicTrackables.get(0);
+
     notifier = new StepNotifier(new String[] {
         "Elevator up",
         "Tollbooth lowered",
@@ -116,15 +150,28 @@ public abstract class AutonomousMat extends LinearOpMode {
     return Tollbooth.JewelColor.INDETERMINATE;
   }
 
-  protected void moveToGlyphBox() {
+  protected void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     try {
-      sleep(250);
-      movement.yDrive(getYDist(), 0.5f);
-      sleep(1000);
-      movement.rotate(getRotationAngle(), 0.5f);
-      sleep(1000);
-      elevator.elevate(-2);
-      sleep(1000);
+      switch (vuMark) {
+        case LEFT: {
+          // TODO: 12/10/2017 Implement Left 
+          break;
+        }
+        case RIGHT: {
+          // TODO: 12/10/2017 Implement Right
+          break;
+        }
+        default: {
+          sleep(250);
+          movement.yDrive(getYDist(), 0.5f);
+          sleep(1000);
+          movement.rotate(getRotationAngle(), 0.5f);
+          sleep(1000);
+          elevator.elevate(-2);
+          sleep(1000);
+          break;
+        }
+      }
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
