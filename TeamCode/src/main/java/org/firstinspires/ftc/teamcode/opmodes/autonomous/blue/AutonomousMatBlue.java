@@ -11,8 +11,10 @@ public class AutonomousMatBlue extends AutonomousMat {
     return Tollbooth.JewelColor.BLUE;
   }
 
+  protected double getPictographDist() { return -1; }
+
   protected double getYDist() {
-    return 34.5 + x;
+    return 34.5 + getPictographDist();
   }
 
   protected double getRotationAngle() {
