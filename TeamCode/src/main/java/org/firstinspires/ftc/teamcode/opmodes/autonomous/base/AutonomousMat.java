@@ -18,7 +18,6 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 public abstract class AutonomousMat extends LinearOpMode {
-  public double x;
 
   protected HSRobot robot;
   protected Movement movement;
@@ -31,9 +30,14 @@ public abstract class AutonomousMat extends LinearOpMode {
   private VuforiaTrackable relicTemplate;
 
   protected abstract Tollbooth.JewelColor getAllianceColor();
+<<<<<<< HEAD
   protected abstract double getYDistCenter();
   protected abstract double getYDistLeft();
   protected abstract double getYDistRight();
+=======
+  protected abstract double getPictographDist();
+  protected abstract double getYDist();
+>>>>>>> c3b5e3a3a885bc627d7acf8d764a9a1b10b8732b
   protected abstract double getRotationAngle();
 
   @Override
@@ -74,7 +78,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private void moveToPictograph() throws Exception {
-    movement.yDrive(x, 0.5f);
+    movement.yDrive(getPictographDist(), 0.5f);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
