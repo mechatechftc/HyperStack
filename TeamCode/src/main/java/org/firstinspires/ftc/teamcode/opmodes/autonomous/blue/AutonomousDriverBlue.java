@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousDriver;
 
-@Autonomous (name = "Blue Autonomous Driver Side", group = "real")
+@Autonomous (name = "Blue Autonomous Driver Side", group = "real.blue")
 public class AutonomousDriverBlue extends AutonomousDriver {
 
   public Tollbooth.JewelColor getAllianceColor() {

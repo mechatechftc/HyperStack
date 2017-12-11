@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousMat;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
-@Autonomous(name = "Red Autonomous Mat Side", group = "real")
+@Autonomous(name = "Red Autonomous Mat Side", group = "real.red")
 public class AutonomousMatRed extends AutonomousMat {
 
   protected Tollbooth.JewelColor getAllianceColor() {
