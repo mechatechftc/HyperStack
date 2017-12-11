@@ -11,7 +11,15 @@ public class AutonomousMatBlue extends AutonomousMat {
     return Tollbooth.JewelColor.BLUE;
   }
 
-  protected double getYDist() {
+  protected double getYDistLeft() {
+    return 40.5 + x;
+  }
+
+  protected double getYDistRight() {
+    return 28.5 + x;
+  }
+
+  protected double getYDistCenter() {
     return 34.5 + x;
   }
 

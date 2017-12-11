@@ -31,7 +31,9 @@ public abstract class AutonomousMat extends LinearOpMode {
   private VuforiaTrackable relicTemplate;
 
   protected abstract Tollbooth.JewelColor getAllianceColor();
-  protected abstract double getYDist();
+  protected abstract double getYDistCenter();
+  protected abstract double getYDistLeft();
+  protected abstract double getYDistRight();
   protected abstract double getRotationAngle();
 
   @Override
@@ -78,7 +80,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
     tollbooth.lower(); // Lower tollbooth arm
     // notifier.notifyStep();
-    sleep(3000);
+    sleep(1000);
     Tollbooth.JewelColor color = tollbooth.checkColor();
     // notifier.notifyStep();
     if (color == allianceColor) {
@@ -155,24 +157,28 @@ public abstract class AutonomousMat extends LinearOpMode {
     try {
       switch (vuMark) {
         case LEFT: {
-          // TODO: 12/10/2017 Implement Left 
+          sleep(250);
+          movement.yDrive(getYDistLeft(), 0.5f);
+          sleep(1000);
           break;
         }
         case RIGHT: {
-          // TODO: 12/10/2017 Implement Right
+          sleep(250);
+          movement.yDrive(getYDistRight(), 0.5f);
+          sleep(1000);
           break;
         }
         default: {
           sleep(250);
-          movement.yDrive(getYDist(), 0.5f);
-          sleep(1000);
-          movement.rotate(getRotationAngle(), 0.5f);
-          sleep(1000);
-          elevator.elevate(-2);
+          movement.yDrive(getYDistCenter(), 0.5f);
           sleep(1000);
           break;
         }
       }
+      movement.rotate(getRotationAngle(), 0.5f);
+      sleep(1000);
+      elevator.elevate(-2);
+      sleep(500);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
