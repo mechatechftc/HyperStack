@@ -18,6 +18,8 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 public abstract class AutonomousMat extends LinearOpMode {
+  public double x;
+
   protected HSRobot robot;
   protected Movement movement;
   protected Gripper gripper;
@@ -25,7 +27,6 @@ public abstract class AutonomousMat extends LinearOpMode {
   protected Elevator elevator;
 
   private StepNotifier notifier;
-  private double x;
   private VuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
 
