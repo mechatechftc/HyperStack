@@ -30,14 +30,10 @@ public abstract class AutonomousMat extends LinearOpMode {
   private VuforiaTrackable relicTemplate;
 
   protected abstract Tollbooth.JewelColor getAllianceColor();
-<<<<<<< HEAD
   protected abstract double getYDistCenter();
   protected abstract double getYDistLeft();
   protected abstract double getYDistRight();
-=======
   protected abstract double getPictographDist();
-  protected abstract double getYDist();
->>>>>>> c3b5e3a3a885bc627d7acf8d764a9a1b10b8732b
   protected abstract double getRotationAngle();
 
   @Override
