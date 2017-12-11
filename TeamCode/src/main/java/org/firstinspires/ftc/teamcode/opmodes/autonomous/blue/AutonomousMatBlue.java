@@ -21,13 +21,13 @@ public class AutonomousMatBlue extends AutonomousMat {
 
   protected double getYDistCenter() {
     return 34.5 + getPictographDist();
+  }
 
-    protected double getPictographDist() {
-      return -1;
-    }
+  protected double getPictographDist() {
+    return -1;
+  }
 
-    protected double getRotationAngle() {
-      return -85;
-    }
+  protected double getRotationAngle() {
+    return -85;
   }
 }
