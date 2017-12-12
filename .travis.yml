@@ -1,4 +1,4 @@
-language: java
+language: android
 install: ./gradlew assemble
 script: ./gradlew check
 jdk:     - oraclejdk8
