@@ -1,4 +1,4 @@
-# HyperStack
+# HyperStack [![Build Status](https://travis-ci.org/mechatechftc/HyperStack.svg?branch=master)](https://travis-ci.org/mechatechftc/HyperStack)
 Code for MechaTech's 2017-2018 FTC Relic Recovery robot, HyperStack.
 
 HyperStack's code is built on top of the [Ninevolt](https://github.com/edinaftc/Ninevolt) library.
