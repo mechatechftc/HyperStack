@@ -12,6 +12,9 @@ public class HSConfig extends Config {
   }
 
   public String getVuKey() {
-    return ""; // TODO: 12/10/2017 ADD Vuforia Key
+    return "AZgpFln/////AAAAGRdVHDnE6k0Wlm/7+0VaHCgLGSbWoGaT48qgOqkPSbfpXssHNhaduYnt17p4DHt+le2FMfVykSh1cC3OA/pAHxx6XCFY" +
+        "xR7xW3YrPvEiPraSe3/26RWitqBWTSOP1ho2H7AXLsMDA7mg+2ij7nzK1HRCXhlauEQbAosl+/cedPlpkEw93CeGSGaolhOtsyNOZxhGlh+005r" +
+        "OFVrXJxQdztw3KsUPzN8KHOEZ/cCucocPvgsqLE+T7eWjAMqnbveXB3X6XBFswYUC7InbaWXZrXC04pLyKjM9wpG+GJMemOUtFpF9CXt1vKBx8r" +
+        "grn929sAOx1YAAX6o+CDTbaFdQq1EpJJ4s+FizjRVX+QMWLbr2";
   }
 }
