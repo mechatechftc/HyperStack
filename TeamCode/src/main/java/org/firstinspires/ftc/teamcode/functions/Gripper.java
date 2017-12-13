@@ -9,9 +9,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Gripper {
 
-  private double closedPosition   =  0.75;
-  private double midPosition      =  0.45;
-  private double openPosition     =  0.15;
+  private double closedPosition     =  0.75;
+  private double lightOpenPosition  =  0.45;
+  private double openPosition       =  0.15;
+  private double midPosition        =  0.38;
 
   private OpMode ctx;
   private Servo bigServo;
@@ -57,9 +58,9 @@ public class Gripper {
   }
 
   public void lightRelease() {
-    bigServo.setPosition(midPosition);
-    bottomServo.setPosition(midPosition);
-    topServo.setPosition(midPosition/* - 0.1*/);
+    bigServo.setPosition(lightOpenPosition);
+    bottomServo.setPosition(lightOpenPosition);
+    topServo.setPosition(lightOpenPosition);
     gripping = false;
     updateTelemetry();
   }
@@ -68,6 +69,12 @@ public class Gripper {
     setPosition(openPosition);
     gripping = false;
     updateTelemetry();
+  }
+
+  public void midPosition() {
+    bigServo.setPosition(midPosition);
+    topServo.setPosition(midPosition);
+    bottomServo.setPosition(midPosition);
   }
 
   public boolean isGripping() {
