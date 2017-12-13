@@ -12,11 +12,11 @@ public class AutonomousMatRed extends AutonomousMat {
   }
 
   protected double getYDistLeft() {
-    return -44 - getPictographDist();
+    return -32 - getPictographDist();
   }
 
   protected double getYDistRight() {
-    return -32 - getPictographDist();
+    return -44 - getPictographDist();
   }
 
   protected double getYDistCenter() {
@@ -24,7 +24,7 @@ public class AutonomousMatRed extends AutonomousMat {
   }
 
   protected double getPictographDist() {
-    return 12;
+    return -12;
   }
 
   protected double getRotationAngle() {
