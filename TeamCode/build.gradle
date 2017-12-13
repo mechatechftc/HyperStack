@@ -16,11 +16,7 @@ apply from: '../build.common.gradle'
 
 repositories {
     maven {
-        url "${artifactory_contextUrl}/libs-snapshot"
-        credentials {
-            username "${artifactory_user}"
-            password "${artifactory_password}"
-        }
+        url "https://dl.bintray.com/edinaftc/ftc"
     }
 }
 dependencies {
