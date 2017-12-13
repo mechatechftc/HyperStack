@@ -106,12 +106,6 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private void customInit() throws Exception {
-    robot = new HSRobot(this); // Initializes robot
-    // Retrieve variables
-    movement = robot.getMovement();
-    gripper = robot.getGripper();
-    tollbooth = robot.getTollbooth();
-    elevator = robot.getElevator();
 
     // vuforia
     int cameraMonitorViewId = hardwareMap.appContext.getResources()
@@ -144,6 +138,14 @@ public abstract class AutonomousMat extends LinearOpMode {
       telemetry.update();
       idle();
     }
+
+    robot = new HSRobot(this); // Initializes robot
+    // Retrieve variables
+    movement = robot.getMovement();
+    gripper = robot.getGripper();
+    tollbooth = robot.getTollbooth();
+    elevator = robot.getElevator();
+
   }
 
   private Tollbooth.JewelColor getOppositionColor(Tollbooth.JewelColor allianceColor) {
