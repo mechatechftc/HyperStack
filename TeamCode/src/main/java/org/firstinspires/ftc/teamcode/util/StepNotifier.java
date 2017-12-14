@@ -18,6 +18,12 @@ public class StepNotifier {
     this.telemetry = ctx.telemetry;
   }
 
+  public StepNotifier(OpMode ctx, String... steps) {
+    this.steps = steps;
+    this.currentStep = 1;
+    this.telemetry = ctx.telemetry;
+  }
+
   public int getCurrentStep() {
     return currentStep;
   }
