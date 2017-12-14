@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.util.StepNotifier;
 public abstract class AutonomousMat extends LinearOpMode {
 
   private HSRobot robot;
-  protected Movement movement;
+  private Movement movement;
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
@@ -34,6 +34,8 @@ public abstract class AutonomousMat extends LinearOpMode {
   protected abstract double getYDistRight();
   protected abstract double getPictographDist();
   protected abstract double getRotationAngle();
+
+  protected double offset = 6;
 
   @Override
   public void runOpMode() throws InterruptedException {
