@@ -106,8 +106,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private void customInit() throws Exception {
-
-    // vuforia
+    // Initialize Vuforia
     int cameraMonitorViewId = hardwareMap.appContext.getResources()
         .getIdentifier(
             "cameraMonitorViewId",
@@ -122,6 +121,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
 
+    // Create step notifier
     notifier = new StepNotifier(new String[] {
         "Elevator up",
         "Tollbooth lowered",
@@ -133,12 +133,6 @@ public abstract class AutonomousMat extends LinearOpMode {
         "Move off platform"
     }, this);
 
-    while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
-      telemetry.addData("Gyro", "Calibrating");
-      telemetry.update();
-      idle();
-    }
-
     robot = new HSRobot(this); // Initializes robot
     // Retrieve variables
     movement = robot.getMovement();
@@ -146,6 +140,11 @@ public abstract class AutonomousMat extends LinearOpMode {
     tollbooth = robot.getTollbooth();
     elevator = robot.getElevator();
 
+    while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
+      telemetry.addData("Gyro", "Calibrating");
+      telemetry.update();
+      idle();
+    }
   }
 
   private Tollbooth.JewelColor getOppositionColor(Tollbooth.JewelColor allianceColor) {
