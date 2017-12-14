@@ -19,14 +19,13 @@ import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 public abstract class AutonomousMat extends LinearOpMode {
 
-  protected HSRobot robot;
+  private HSRobot robot;
   protected Movement movement;
-  protected Gripper gripper;
-  protected Tollbooth tollbooth;
-  protected Elevator elevator;
+  private Gripper gripper;
+  private Tollbooth tollbooth;
+  private Elevator elevator;
 
   private StepNotifier notifier;
-  private VuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
 
   protected abstract Tollbooth.JewelColor getAllianceColor();
@@ -62,6 +61,8 @@ public abstract class AutonomousMat extends LinearOpMode {
       moveToPictograph();
       moveToGlyphBox(readPictograph());
       releaseGlyph();
+    } catch (InterruptedException ie) {
+      throw ie;
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
       ExceptionHandling.standardExceptionHandling(e, this);
@@ -69,8 +70,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-    return vuMark;
+    return RelicRecoveryVuMark.from(relicTemplate);
   }
 
   private void moveToPictograph() throws Exception {
@@ -117,8 +117,8 @@ public abstract class AutonomousMat extends LinearOpMode {
     parameters.vuforiaLicenseKey = HSConfig.getInstance().getVuKey();
     parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-    vuforia = ClassFactory.createVuforiaLocalizer(parameters);
-    VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
+    VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+    VuforiaTrackables relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
 
     // Create step notifier
@@ -156,7 +156,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     return Tollbooth.JewelColor.INDETERMINATE;
   }
 
-  protected void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
+  private void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     try {
       switch (vuMark) {
         case LEFT: {
