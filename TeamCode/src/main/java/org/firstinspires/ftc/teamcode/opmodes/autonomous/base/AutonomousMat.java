@@ -35,7 +35,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   protected abstract double getPictographDist();
   protected abstract double getRotationAngle();
 
-  protected double offset = 6;
+  protected double offset = 8;
 
   @Override
   public void runOpMode() throws InterruptedException {
@@ -72,7 +72,10 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    return RelicRecoveryVuMark.from(relicTemplate);
+    sleep(250);
+    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+    idle();
+    return vuMark;
   }
 
   private void moveToPictograph() throws Exception {
@@ -122,6 +125,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
     VuforiaTrackables relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
+    idle();
 
     // Create step notifier
     notifier = new StepNotifier(new String[] {
@@ -159,6 +163,10 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
+    if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.RECOMMENDED)) {
+      telemetry.addData("VuMark", vuMark.toString());
+      telemetry.update();
+    }
     try {
       switch (vuMark) {
         case LEFT: {
@@ -192,12 +200,13 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     try {
-      movement.yDrive(10, 0.5f);
-      sleep(500);
+      sleep(250);
       elevator.elevate(-1);
       sleep(500);
       gripper.wideRelease();
       sleep(250);
+      movement.yDrive(10, 0.5f);
+      sleep(500);
       movement.yDrive(-4, 0.5f);
       sleep(1000);
     }
