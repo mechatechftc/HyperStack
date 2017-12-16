@@ -27,6 +27,7 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private StepNotifier notifier;
   private VuforiaTrackable relicTemplate;
+  private VuforiaTrackables relicTrackables;
 
   protected abstract Tollbooth.JewelColor getAllianceColor();
   protected abstract double getYDistCenter();
@@ -52,14 +53,14 @@ public abstract class AutonomousMat extends LinearOpMode {
       // Wait until play button is pressed
       waitForStart();
       resetStartTime();
+      relicTrackables.activate();
 
       // Perform autonomous
-//      gripAndElevate();
-//      bumpJewel(getAllianceColor());
-//      moveToPictograph();
-      telemetry.addData("VuMarkOnly", readPictograph().toString());
-//      moveToGlyphBox(readPictograph());
-//      releaseGlyph();
+      gripAndElevate();
+      bumpJewel(getAllianceColor());
+      moveToPictograph();
+      moveToGlyphBox(readPictograph());
+      releaseGlyph();
     } catch (InterruptedException ie) {
       throw ie;
     } catch (Exception e) {
@@ -128,8 +129,9 @@ public abstract class AutonomousMat extends LinearOpMode {
     parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
     VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
-    VuforiaTrackables relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
+    relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
+    relicTemplate.setName("relicVuMarkTemplate");
     idle();
 
     // Create step notifier
@@ -194,8 +196,6 @@ public abstract class AutonomousMat extends LinearOpMode {
         }
       }
       movement.rotate(getRotationAngle(), 0.5f);
-      sleep(1000);
-      elevator.elevate(-2);
       sleep(500);
     }
     catch (Exception e) {
@@ -205,9 +205,8 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     try {
-      sleep(250);
-      elevator.elevate(-1);
-      sleep(500);
+      elevator.elevate(-3);
+      idle();
       gripper.wideRelease();
       sleep(250);
       movement.yDrive(10, 0.5f);

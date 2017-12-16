@@ -7,18 +7,18 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 @Autonomous(name = "Blue Autonomous Mat Side", group = "real.blue")
 public class AutonomousMatBlue extends AutonomousMat {
 
-  private double centerDist = 30 + getPictographDist();
+  private double centerDist = 34.5 - getPictographDist();
 
   protected Tollbooth.JewelColor getAllianceColor() {
     return Tollbooth.JewelColor.BLUE;
   }
 
   protected double getYDistLeft() {
-    return centerDist + offset;
+    return centerDist - offset;
   }
 
   protected double getYDistRight() {
-    return centerDist - offset;
+    return centerDist + offset;
   }
 
   protected double getYDistCenter() {
@@ -26,10 +26,10 @@ public class AutonomousMatBlue extends AutonomousMat {
   }
 
   protected double getPictographDist() {
-    return 6;
+    return -6;
   }
 
   protected double getRotationAngle() {
-    return -85;
+    return -81;
   }
 }
