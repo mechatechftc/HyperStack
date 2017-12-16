@@ -54,21 +54,26 @@ public abstract class AutonomousMat extends LinearOpMode {
       resetStartTime();
 
       // Perform autonomous
-      gripper.grip();
-      sleep(500);
-      elevator.elevate(4);
-      notifier.notifyStep();
-      sleep(1000);
-      bumpJewel(getAllianceColor());
-      moveToPictograph();
-      moveToGlyphBox(readPictograph());
-      releaseGlyph();
+//      gripAndElevate();
+//      bumpJewel(getAllianceColor());
+//      moveToPictograph();
+      telemetry.addData("VuMarkOnly", readPictograph().toString());
+//      moveToGlyphBox(readPictograph());
+//      releaseGlyph();
     } catch (InterruptedException ie) {
       throw ie;
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
       ExceptionHandling.standardExceptionHandling(e, this);
     }
+  }
+
+  private void gripAndElevate() throws Exception {
+    gripper.grip();
+    sleep(500);
+    elevator.elevate(4);
+    notifier.notifyStep();
+    sleep(1000);
   }
 
   private RelicRecoveryVuMark readPictograph() {
