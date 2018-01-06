@@ -73,8 +73,8 @@ public abstract class AutonomousMat extends LinearOpMode {
     gripper.grip();
     sleep(500);
     elevator.elevate(4);
+    sleep(500);
     notifier.notifyStep();
-    sleep(1000);
   }
 
   private RelicRecoveryVuMark readPictograph() {

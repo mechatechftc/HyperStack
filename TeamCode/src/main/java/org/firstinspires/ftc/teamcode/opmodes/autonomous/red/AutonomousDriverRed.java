@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes.autonomous.red;
 
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousDriver;
 
@@ -12,18 +13,28 @@ public class AutonomousDriverRed extends AutonomousDriver {
     return Tollbooth.JewelColor.RED;
   }
 
-  public void moveToGlyphBox() {
+  public void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     try {
-      movement.yDrive(-24, power);
+
+      movement.yDrive(-31.5, power);
       sleep(500);
       movement.rotate(180, power);
       sleep(500);
-      movement.xDrive(-7.5, power);
-      sleep(500);
+
+      switch (vuMark) {
+        case LEFT: {
+          movement.xDrive(offset, power);
+          sleep(500);
+        }
+        case RIGHT: {
+          movement.xDrive(-offset, power);
+          sleep(500);
+        }
+      }
       movement.yDrive(6, power);
       sleep(500);
     }
-    catch (Exception e) {
+    catch(Exception e){
       ExceptionHandling.standardExceptionHandling(e, this);
     }
   }
