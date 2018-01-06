@@ -10,9 +10,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Gripper {
 
   private double closedPosition     =  0.75;
-  private double lightOpenPosition  =  0.45;
+  private double lightOpenPosition  =  0.37;
   private double openPosition       =  0.15;
-  private double midPosition        =  0.38;
+  private double midPosition        =  0.3;
 
   private OpMode ctx;
   private Servo bigServo;

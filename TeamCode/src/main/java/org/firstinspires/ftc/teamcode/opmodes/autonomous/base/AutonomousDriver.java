@@ -29,7 +29,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
   public Movement movement;
 
   protected float power = 0.5f;
-  protected double offset = 8;
+  protected double offset = 12;
 
   public abstract Tollbooth.JewelColor getAllianceColor();
   public abstract void moveToGlyphBox(RelicRecoveryVuMark vuMark);
