@@ -95,6 +95,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private RelicRecoveryVuMark readPictograph() {
+    sleep(250);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
     idle();
     telemetry.addData("VuMark", vuMark.toString());
