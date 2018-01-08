@@ -23,13 +23,13 @@ public class AutonomousDriverBlue extends AutonomousDriver {
       movement.xDrive(centerDist, power);
       sleep(500);
 
-      switch (vuMark) {
-        case LEFT: {
-          movement.xDrive(-offset, power);
-        }
-        case RIGHT: {
-          movement.xDrive(offset, power);
-        }
+      if(vuMark == RelicRecoveryVuMark.LEFT) {
+        movement.xDrive(-offset, power);
+        sleep(500);
+      }
+      else if(vuMark == RelicRecoveryVuMark.RIGHT) {
+        movement.xDrive(offset, power);
+        sleep(500);
       }
       movement.yDrive(12, power);
       sleep(500);
