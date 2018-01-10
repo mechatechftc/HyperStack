@@ -105,7 +105,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void moveToPictograph() throws Exception {
     movement.yDrive(-5, power);
-    sleep(1000);
+    sleep(500);
   }
 
   private Tollbooth.JewelColor oppositionColor(Tollbooth.JewelColor allianceColor) {
@@ -124,25 +124,24 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
-
     Tollbooth.JewelColor color = tollbooth.checkColor();
     notifier.notifyStep();
     if (color == allianceColor) {
       movement.rotate(-15, 0.2f);
       notifier.notifyStep();
-      sleep(300);
+      idle();
       tollbooth.raise();
       sleep(300);
       movement.rotate(15, 0.2f);
-      sleep(300);
+      idle();
     } else if (color == oppositionColor(allianceColor)) {
       movement.rotate(15, 0.2f);
       notifier.notifyStep();
-      sleep(300);
+      idle();
       tollbooth.raise();
       sleep(300);
       movement.rotate(-15, 0.2f);
-      sleep(300);
+      idle();
     } else {
       telemetry.addLine("Error with color sensor readings");
       telemetry.update();
@@ -152,11 +151,11 @@ abstract public class AutonomousDriver extends LinearOpMode{
   private void releaseGlyph() {
     try {
       elevator.elevate(-2);
-      sleep(1000);
-      gripper.wideRelease();
       sleep(500);
+      gripper.wideRelease();
+      sleep(300);
       movement.yDrive(-4, 0.5f);
-      sleep(1000);
+      sleep(500);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
