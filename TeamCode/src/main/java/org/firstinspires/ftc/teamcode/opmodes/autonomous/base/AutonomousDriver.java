@@ -136,8 +136,8 @@ abstract public class AutonomousDriver extends LinearOpMode{
       idle();
     } else if (color == oppositionColor(allianceColor)) {
       movement.rotate(15, 0.2f);
-      notifier.notifyStep();
       idle();
+      notifier.notifyStep();
       tollbooth.raise();
       sleep(300);
       movement.rotate(-15, 0.2f);
