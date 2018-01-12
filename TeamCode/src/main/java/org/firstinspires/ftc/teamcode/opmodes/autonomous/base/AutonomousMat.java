@@ -72,7 +72,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private void gripAndElevate() throws Exception {
     gripper.grip();
     sleep(500);
-    elevator.elevate(4);
+    elevator.elevate(7);
     sleep(500);
     notifier.notifyStep();
   }
@@ -97,16 +97,18 @@ public abstract class AutonomousMat extends LinearOpMode {
     Tollbooth.JewelColor color = tollbooth.checkColor();
     // notifier.notifyStep();
     if (color == allianceColor) {
+      sleep(250);
       movement.rotate(-15, 0.2f);
       // notifier.notifyStep();
-      sleep(1000);
+      sleep(500);
       tollbooth.raise();
-      sleep(1000);
+      sleep(500);
       movement.rotate(15, 0.2f);
     } else if (color == getOppositionColor(allianceColor)) {
+      sleep(250);
       movement.rotate(15, 0.2f);
       // notifier.notifyStep();
-      sleep(1000);
+      sleep(500);
       tollbooth.raise();
       sleep(1000);
       movement.rotate(-15, 0.2f);
@@ -205,7 +207,7 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     try {
-      elevator.elevate(-3);
+      elevator.elevate(-4);
       idle();
       gripper.wideRelease();
       sleep(250);
