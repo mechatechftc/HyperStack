@@ -104,7 +104,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void moveToPictograph() throws Exception {
     sleep(500);
-    movement.yDrive(-5, power);
+    movement.yDrive(-2, power);
     sleep(500);
   }
 
@@ -145,10 +145,12 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void releaseGlyph() {
     try {
-      elevator.elevate(-4);
+      elevator.elevate(-5);
       sleep(500);
       gripper.wideRelease();
       sleep(300);
+      movement.yDrive(8, power);
+      sleep(500);
       movement.yDrive(-4, 0.5f);
       sleep(500);
     }

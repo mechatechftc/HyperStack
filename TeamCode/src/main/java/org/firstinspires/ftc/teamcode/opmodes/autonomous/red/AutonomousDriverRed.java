@@ -15,7 +15,7 @@ public class AutonomousDriverRed extends AutonomousDriver {
 
   public void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     try {
-      movement.yDrive(-25, power);
+      movement.yDrive(-28, power);
       sleep(500);
       movement.rotate(180, power);
       sleep(500);

@@ -26,7 +26,7 @@ public class AutonomousMatBlue extends AutonomousMat {
   }
 
   protected double getPictographDist() {
-    return -6;
+    return -4;
   }
 
   protected double getRotationAngle() {
