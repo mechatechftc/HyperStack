@@ -15,7 +15,6 @@ import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
-import org.firstinspires.ftc.teamcode.util.StepNotifier;
 
 public abstract class AutonomousMat extends LinearOpMode {
 
@@ -25,7 +24,6 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Tollbooth tollbooth;
   private Elevator elevator;
 
-  private StepNotifier notifier;
   private VuforiaTrackable relicTemplate;
   private VuforiaTrackables relicTrackables;
 
@@ -74,7 +72,6 @@ public abstract class AutonomousMat extends LinearOpMode {
     sleep(500);
     elevator.elevate(7);
     sleep(500);
-    notifier.notifyStep();
   }
 
   private RelicRecoveryVuMark readPictograph() {
@@ -136,18 +133,6 @@ public abstract class AutonomousMat extends LinearOpMode {
     relicTemplate.setName("relicVuMarkTemplate");
     idle();
 
-    // Create step notifier
-    notifier = new StepNotifier(new String[] {
-        "Elevator up",
-        "Tollbooth lowered",
-        "Gripper released",
-        "Color checked",
-        "Bump jewel",
-        "Re-align",
-        "Raise tollbooth",
-        "Move off platform"
-    }, this);
-
     robot = new HSRobot(this); // Initializes robot
     // Retrieve variables
     movement = robot.getMovement();
@@ -156,8 +141,6 @@ public abstract class AutonomousMat extends LinearOpMode {
     elevator = robot.getElevator();
 
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
-      telemetry.addData("Gyro", "Calibrating");
-      telemetry.update();
       idle();
     }
   }
@@ -172,7 +155,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
-    if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.RECOMMENDED)) {
+    if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.VERBOSE)) {
       telemetry.addData("VuMark", vuMark.toString());
       telemetry.update();
     }

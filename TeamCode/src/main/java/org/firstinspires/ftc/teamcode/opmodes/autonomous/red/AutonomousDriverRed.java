@@ -15,9 +15,11 @@ public class AutonomousDriverRed extends AutonomousDriver {
 
   public void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     try {
-      movement.yDrive(-31.5, power);
+      movement.yDrive(-25, power);
       sleep(500);
       movement.rotate(180, power);
+      sleep(500);
+      movement.xDrive(-25, power);
       sleep(500);
 
       if(vuMark == RelicRecoveryVuMark.LEFT) {
@@ -28,7 +30,7 @@ public class AutonomousDriverRed extends AutonomousDriver {
         movement.xDrive(-offset, power);
         sleep(500);
       }
-      movement.yDrive(6, power);
+      movement.yDrive(9, power);
       sleep(500);
     }
     catch(Exception e){

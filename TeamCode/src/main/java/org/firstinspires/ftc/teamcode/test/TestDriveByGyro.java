@@ -10,7 +10,7 @@ import com.edinaftc.ninevolt.core.hw.drivetrain.mecanum.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 
 @Autonomous(name = "Test the Gryo Drive", group = "test")
-
+@Disabled
 public class TestDriveByGyro extends LinearOpMode {
 
   Hardware hardware;
