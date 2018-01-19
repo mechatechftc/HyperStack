@@ -146,13 +146,13 @@ abstract public class AutonomousDriver extends LinearOpMode{
   private void releaseGlyph() {
     try {
       elevator.elevate(-5);
-      sleep(500);
+      idle();
       gripper.wideRelease();
-      sleep(300);
+      sleep(250);
       movement.yDrive(8, power);
       sleep(500);
       movement.yDrive(-4, 0.5f);
-      sleep(500);
+      sleep(1000);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);

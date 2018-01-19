@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousDriver;
 @Autonomous (name = "Blue Autonomous Driver Side", group = "real.blue")
 public class AutonomousDriverBlue extends AutonomousDriver {
 
-  private double centerDist = 20;
+  private double centerDist = 22;
 
   public Tollbooth.JewelColor getAllianceColor() {
     return Tollbooth.JewelColor.BLUE;
