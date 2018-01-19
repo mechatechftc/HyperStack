@@ -59,12 +59,38 @@ public abstract class AutonomousMat extends LinearOpMode {
       moveToPictograph();
       moveToGlyphBox(readPictograph());
       releaseGlyph();
+      turnAndDrive();
     } catch (InterruptedException ie) {
       throw ie;
     } catch (Exception e) {
       // Stops OpMode and prints exception in case of exception
       ExceptionHandling.standardExceptionHandling(e, this);
     }
+  }
+
+  private void turnAndDrive() throws Exception {
+    movement.rotate(180,0.5f);
+    sleep(500);
+    gripper.midPosition();
+    sleep(500);
+    movement.yDrive(20, 0.5f);
+    sleep(500);
+    gripper.grip();
+    sleep(500);
+    movement.yDrive(-10, 0.5f);
+    sleep(500);
+    movement.rotate(-180, 0.5f);
+    sleep(500);
+    movement.yDrive(10, 0.5f);
+    sleep(500);
+    elevator.elevate(6);
+    sleep(500);
+    movement.yDrive(2, 0.5f);
+    sleep(500);
+    gripper.lightRelease();
+    sleep(500);
+    movement.yDrive(-6, 0.5f);
+    sleep(500);
   }
 
   private void gripAndElevate() throws Exception {
