@@ -66,15 +66,15 @@ public class Gripper {
   }
 
   public void wideRelease() {
-    setPosition(openPosition);
+    bottomServo.setPosition(openPosition);
+    topServo.setPosition(openPosition);
+    bigServo.setPosition(openPosition + 0.1);
     gripping = false;
     updateTelemetry();
   }
 
   public void midPosition() {
-    bigServo.setPosition(midPosition);
-    topServo.setPosition(midPosition);
-    bottomServo.setPosition(midPosition);
+    setPosition(midPosition);
   }
 
   public boolean isGripping() {
