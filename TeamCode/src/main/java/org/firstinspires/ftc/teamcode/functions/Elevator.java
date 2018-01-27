@@ -23,7 +23,7 @@ public class Elevator {
   private LinearOpMode ctxl;
   private DcMotor motor;
   private boolean isVerbose;
-  private float standardPower = 0.8f;
+  private float standardPower = 1f;
   private double ppi;
   private int maxHeight;
 
