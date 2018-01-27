@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.base;
 
 import com.disnodeteam.dogecv.DogeCV;
+import com.disnodeteam.dogecv.detectors.CryptoboxDetector;
 import com.edinaftc.ninevolt.Config;
 import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
@@ -20,7 +21,7 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 public abstract class AutonomousMat extends LinearOpMode {
 
   private HSRobot robot;
-  private Movement movement;
+  public Movement movement;
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
@@ -188,7 +189,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     return Tollbooth.JewelColor.INDETERMINATE;
   }
 
-  private void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
+  protected void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.VERBOSE)) {
       telemetry.addData("VuMark", vuMark.toString());
       telemetry.update();
