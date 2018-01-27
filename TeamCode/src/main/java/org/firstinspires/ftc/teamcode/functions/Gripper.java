@@ -57,28 +57,17 @@ public class Gripper {
     updateTelemetry();
   }
 
-  public void lightRelease() {
-    bigServo.setPosition(lightOpenPosition - 0.07);
-    bottomServo.setPosition(lightOpenPosition);
-    topServo.setPosition(lightOpenPosition + 0.08);
-    gripping = false;
-    updateTelemetry();
-  }
-
   public void wideRelease() {
     bottomServo.setPosition(openPosition);
-    topServo.setPosition(openPosition);
-    bigServo.setPosition(openPosition + 0.1);
+    topServo.setPosition(openPosition + 0.08);
+    bigServo.setPosition(openPosition - 0.15);
     gripping = false;
     updateTelemetry();
   }
 
   public void midPosition() {
-    setPosition(midPosition);
+    topServo.setPosition(midPosition + 0.08);
+    bottomServo.setPosition(midPosition);
+    bigServo.setPosition(midPosition - 0.13);
   }
-
-  public boolean isGripping() {
-    return gripping;
-  }
-
 }
