@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousMat;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousMatDiag;
 
-@Autonomous(name = "Red Autonomous Mat Side", group = "real.red")
+@Autonomous(name = "Red Autonomous Mat Side Diagonal", group = "real.red")
 public class AutonomousMatRedDiag extends AutonomousMatDiag {
 
   private double centerDist = -38 - getPictographDist();
