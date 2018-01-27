@@ -29,11 +29,14 @@ public class TestDogeCV extends LinearOpMode{
   }
 
   private void detectCryptobox() {
-    while(opModeIsActive()) {
-      if(cryptoboxDetector.isCryptoBoxDetected() && cryptoboxDetector.isColumnDetected())
-      telemetry.addData("Column Left ", cryptoboxDetector.getCryptoBoxLeftPosition());
-      telemetry.addData("Column Center ", cryptoboxDetector.getCryptoBoxCenterPosition());
-      telemetry.addData("Column Right ", cryptoboxDetector.getCryptoBoxRightPosition());
+    while (opModeIsActive()) {
+      telemetry.addData("isCryptoboxDetected",cryptoboxDetector.isCryptoBoxDetected());
+      telemetry.addData("isColumnDetected", cryptoboxDetector.isColumnDetected());
+      if (cryptoboxDetector.isCryptoBoxDetected() && cryptoboxDetector.isColumnDetected()) {
+        telemetry.addData("Column Left ", cryptoboxDetector.getCryptoBoxLeftPosition());
+        telemetry.addData("Column Center ", cryptoboxDetector.getCryptoBoxCenterPosition());
+        telemetry.addData("Column Right ", cryptoboxDetector.getCryptoBoxRightPosition());
+      }
       telemetry.update();
     }
   }
