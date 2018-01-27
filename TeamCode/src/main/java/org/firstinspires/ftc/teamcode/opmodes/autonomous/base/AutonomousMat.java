@@ -7,7 +7,6 @@ import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
@@ -26,6 +25,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
+  private final static float power = 0.5f;
 
   private CloseableVuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
@@ -74,27 +74,29 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private void turnAndDrive() throws Exception {
-    movement.rotate(180,0.5f);
+    movement.yDrive(-5, power);
+    sleep(500);
+    movement.rotate(180,power);
     sleep(500);
     gripper.midPosition();
     sleep(500);
-    movement.yDrive(20, 0.5f);
+    movement.yDrive(15, power);
     sleep(500);
     gripper.grip();
     sleep(500);
-    movement.yDrive(-10, 0.5f);
+    movement.yDrive(-10, power);
     sleep(500);
-    movement.rotate(-180, 0.5f);
+    movement.rotate(-180, power);
     sleep(500);
-    movement.yDrive(10, 0.5f);
+    movement.yDrive(10, power);
     sleep(500);
     elevator.elevate(6);
     sleep(500);
-    movement.yDrive(2, 0.5f);
+    movement.yDrive(2, power);
     sleep(500);
     gripper.lightRelease();
     sleep(500);
-    movement.yDrive(-6, 0.5f);
+    movement.yDrive(-6, power);
     sleep(500);
   }
 
