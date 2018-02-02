@@ -104,7 +104,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void moveToPictograph() throws Exception {
     sleep(500);
-    movement.yDrive(-2, power);
+    movement.yDrive(-5, power);
     sleep(500);
   }
 

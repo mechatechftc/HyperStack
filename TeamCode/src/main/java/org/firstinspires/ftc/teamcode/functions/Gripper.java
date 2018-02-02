@@ -14,9 +14,9 @@ public class Gripper {
   private double midPosition        =  0.3;
 
   private OpMode ctx;
-  private Servo bigServo;
-  private Servo bottomServo;
-  private Servo topServo;
+  public Servo bigServo;
+  public Servo bottomServo;
+  public Servo topServo;
   private boolean gripping;
 
   public Gripper(String bigServoId, String bottomServoId, String topServoId, OpMode ctx) {
@@ -30,7 +30,7 @@ public class Gripper {
   }
 
   public void setPosition(double position) {
-    bigServo.setPosition(position - 0.14);
+    bigServo.setPosition(position - 0.2);
     bottomServo.setPosition(position);
     topServo.setPosition(position + 0.08);
   }
@@ -63,6 +63,8 @@ public class Gripper {
   }
 
   public void midPosition() {
-   setPosition(midPosition);
+    bigServo.setPosition(midPosition - 0.27);
+    bottomServo.setPosition(midPosition);
+    topServo.setPosition(midPosition + 0.08);
   }
 }
