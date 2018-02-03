@@ -87,7 +87,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             android:layout_height="wrap_content"
             android:src="@drawable/ic_menu_material"
             android:tint="#11ffffff"
-            android:background="@android:color/transparent"
+            android:background="?android:attr/selectableItemBackground"
             android:adjustViewBounds="true"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
