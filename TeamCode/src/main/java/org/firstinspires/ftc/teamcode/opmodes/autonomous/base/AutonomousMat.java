@@ -78,7 +78,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     sleep(500);
     movement.rotate(180,power);
     sleep(500);
-    gripper.midPosition();
+    gripper.wideRelease();
     sleep(500);
     movement.yDrive(25, power);
     sleep(500);
@@ -92,7 +92,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     sleep(500);
     movement.yDrive(25, power);
     sleep(500);
-    gripper.lightRelease();
+    gripper.midPosition();
     sleep(500);
     movement.yDrive(-6, power);
     sleep(500);

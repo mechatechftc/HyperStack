@@ -92,7 +92,7 @@ public class HSTeleOp extends OpMode {
     if (gamepad2.right_trigger > 0.8) {
       gripper.grip();
     } else if (gamepad2.right_bumper) {
-      gripper.lightRelease();
+      gripper.midPosition();
     } else if (gamepad2.y) {
       gripper.midPosition();
     } else if (gamepad2.left_trigger > 0.8) {
