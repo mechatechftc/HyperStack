@@ -86,7 +86,8 @@ abstract public class AutonomousDriver extends LinearOpMode{
     this.tollbooth = robot.getTollbooth();
     this.elevator = robot.getElevator();
 
-    gripper.grip();
+    gripper.bottomGrip();
+    sleep(250);
 
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
       telemetry.addData("Gyro", "Calibrating");

@@ -166,6 +166,9 @@ public abstract class AutonomousMat extends LinearOpMode {
     tollbooth = robot.getTollbooth();
     elevator = robot.getElevator();
 
+    gripper.bottomGrip();
+    sleep(250);
+
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
       idle();
     }
