@@ -86,6 +86,8 @@ abstract public class AutonomousDriver extends LinearOpMode{
     this.tollbooth = robot.getTollbooth();
     this.elevator = robot.getElevator();
 
+    gripper.autonomousGrip();
+
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
       telemetry.addData("Gyro", "Calibrating");
       telemetry.update();
@@ -115,9 +117,8 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private void gripAndElevate() throws Exception {
-    gripper.grip();
-    sleep(500);
     elevator.elevate(7);
+    sleep(500);
     tollbooth.lower(); // Lower tollbooth arm
     sleep(1000);
   }

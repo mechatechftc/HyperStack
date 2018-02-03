@@ -1,9 +1,10 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.edinaftc.ninevolt.core.hw.Hardware;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
@@ -18,6 +19,7 @@ public class HSTeleOp extends OpMode {
   private Movement movement;
   private Gripper gripper;
   private Elevator elevator;
+  private Hardware hardware;
   private boolean gripperLock;
   private int block;
   private double lastBlockUpdateTime;
@@ -30,12 +32,12 @@ public class HSTeleOp extends OpMode {
       robot = new HSRobot(this);
 
       // Utility variables
+      hardware = robot.getHardware();
       movement = robot.getMovement();
       gripper = robot.getGripper();
       elevator = robot.getElevator();
 
-      movement.setRunUsingEncoders(true);
-
+      movement.setDefaultRunUsingEncoders(true);
       // Alert user that initialization was successful
       telemetry.addData("Initialization", "Done!");
       telemetry.update();
@@ -81,9 +83,9 @@ public class HSTeleOp extends OpMode {
       movement.directDrive(gamepad1.right_trigger * gearRatio, 0, 0);
     } else {
       movement.directDrive(
-        0,
-        -gamepad1.left_stick_y * gearRatio,
-        gamepad1.right_stick_x * gearRatio
+          0,
+          -gamepad1.left_stick_y * gearRatio,
+          gamepad1.right_stick_x * gearRatio
       );
     }
   }

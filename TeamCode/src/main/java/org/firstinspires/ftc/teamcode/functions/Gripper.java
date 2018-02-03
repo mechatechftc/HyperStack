@@ -11,7 +11,8 @@ public class Gripper {
 
   private double closedPosition     =  0.5;
   private double openPosition       =  0.15;
-  private double midPosition        =  0.3;
+  private double midPosition        =  0.35;
+  private double autonomousPosition =  0.4;
 
   private OpMode ctx;
   public Servo bigServo;
@@ -50,6 +51,10 @@ public class Gripper {
     bottomServo.setPosition(closedPosition);
   }
 
+  public void autonomousGrip() {
+    setPosition(autonomousPosition);
+  }
+
   public void grip() {
     setPosition(closedPosition);
     gripping = true;
@@ -63,8 +68,8 @@ public class Gripper {
   }
 
   public void midPosition() {
-    bigServo.setPosition(midPosition - 0.27);
+    bigServo.setPosition(midPosition - 0.18);
     bottomServo.setPosition(midPosition);
-    topServo.setPosition(midPosition + 0.08);
+    topServo.setPosition(midPosition + 0.04);
   }
 }

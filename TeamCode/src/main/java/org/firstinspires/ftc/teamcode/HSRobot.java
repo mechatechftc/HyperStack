@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
 public class HSRobot {
   private static final int    PULSES_PER_MOTOR_REV  = 28;
-  private static final double DRIVE_GEAR_REDUCTION  = 40.0;
+  private static final double DRIVE_GEAR_REDUCTION  = 20.0;
   private static final double WHEEL_DIAMETER_INCHES = 4;
   private static final double PULSES_PER_INCH = (PULSES_PER_MOTOR_REV *
       DRIVE_GEAR_REDUCTION) /
