@@ -46,7 +46,7 @@ public class Gripper {
   }
 
   public void bottomGrip() {
-    bigServo.setPosition(closedPosition);
+    bigServo.setPosition(closedPosition - 0.2);
     bottomServo.setPosition(closedPosition);
   }
 
