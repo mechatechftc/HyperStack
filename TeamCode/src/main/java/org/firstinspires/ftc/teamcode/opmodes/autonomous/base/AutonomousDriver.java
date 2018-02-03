@@ -86,7 +86,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     this.tollbooth = robot.getTollbooth();
     this.elevator = robot.getElevator();
 
-    gripper.autonomousGrip();
+    gripper.grip();
 
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
       telemetry.addData("Gyro", "Calibrating");
@@ -98,7 +98,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
   private RelicRecoveryVuMark readPictograph() {
     sleep(250);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-    idle();
+    sleep(250);
     telemetry.addData("VuMark", vuMark.toString());
     telemetry.update();
     return vuMark;
@@ -120,7 +120,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     elevator.elevate(7);
     sleep(500);
     tollbooth.lower(); // Lower tollbooth arm
-    sleep(1000);
+    sleep(500);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {

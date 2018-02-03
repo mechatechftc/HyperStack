@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.base;
 
-import com.disnodeteam.dogecv.DogeCV;
-import com.disnodeteam.dogecv.detectors.CryptoboxDetector;
 import com.edinaftc.ninevolt.Config;
 import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
@@ -27,7 +25,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Elevator elevator;
   private final static float power = 0.5f;
 
-  private CloseableVuforiaLocalizer vuforia;
+  private VuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
   private VuforiaTrackables relicTrackables;
 
@@ -58,8 +56,7 @@ public abstract class AutonomousMat extends LinearOpMode {
       relicTrackables.activate();
 
       // Perform autonomous
-      gripAndElevate();
-      DogeCV dogeCV = new DogeCV();
+      elevate();
       bumpJewel(getAllianceColor());
       moveToPictograph();
       moveToGlyphBox(readPictograph());
@@ -98,9 +95,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     sleep(500);
   }
 
-  private void gripAndElevate() throws Exception {
-    gripper.grip();
-    sleep(500);
+  private void elevate() throws Exception {
     elevator.elevate(7);
     sleep(500);
   }
@@ -108,9 +103,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private RelicRecoveryVuMark readPictograph() {
     sleep(250);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-    idle();
-    vuforia.close();
-    idle();
+    sleep(250);
     return vuMark;
   }
 
