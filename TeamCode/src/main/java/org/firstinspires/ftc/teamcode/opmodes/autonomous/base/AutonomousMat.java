@@ -23,7 +23,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
-  private final static float power = 0.5f;
+  private final static float power = 0.25f;
 
   private VuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
@@ -109,7 +109,7 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void moveToPictograph() throws Exception {
     sleep(250);
-    movement.yDrive(getPictographDist(), 0.5f);
+    movement.yDrive(getPictographDist(), power);
     sleep(500);
   }
 
@@ -192,24 +192,24 @@ public abstract class AutonomousMat extends LinearOpMode {
       switch (vuMark) {
         case LEFT: {
           sleep(250);
-          movement.yDrive(getYDistLeft(), 0.5f);
+          movement.yDrive(getYDistLeft(), power);
           sleep(1000);
           break;
         }
         case RIGHT: {
           sleep(250);
-          movement.yDrive(getYDistRight(), 0.5f);
+          movement.yDrive(getYDistRight(), power);
           sleep(1000);
           break;
         }
         default: {
           sleep(250);
-          movement.yDrive(getYDistCenter(), 0.5f);
+          movement.yDrive(getYDistCenter(), power);
           sleep(1000);
           break;
         }
       }
-      movement.rotate(getRotationAngle(), 0.5f);
+      movement.rotate(getRotationAngle(), power);
       sleep(500);
     }
     catch (Exception e) {
@@ -221,7 +221,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     try {
       elevator.elevate(-5);
       idle();
-      movement.yDrive(10, 0.5f);
+      movement.yDrive(10, power);
       sleep(500);
       gripper.midPosition();
       sleep(250);
