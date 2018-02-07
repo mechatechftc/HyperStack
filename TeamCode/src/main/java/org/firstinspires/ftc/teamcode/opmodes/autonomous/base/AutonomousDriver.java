@@ -106,9 +106,9 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private void moveToPictograph() throws Exception {
-    sleep(500);
+    sleep(250);
     movement.yDrive(-5, power);
-    sleep(500);
+    sleep(250);
   }
 
   private Tollbooth.JewelColor oppositionColor(Tollbooth.JewelColor allianceColor) {
@@ -119,9 +119,9 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void gripAndElevate() throws Exception {
     elevator.elevate(7);
-    sleep(500);
+    sleep(100);
     tollbooth.lower(); // Lower tollbooth arm
-    sleep(500);
+    sleep(300);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
@@ -147,11 +147,11 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void releaseGlyph() {
     try {
-      elevator.elevate(-3);
-      idle();
       movement.yDrive(10, power);
-      sleep(500);
-      gripper.midPosition();
+      sleep(250);
+      elevator.elevate(-5);
+      sleep(100);
+      gripper.wideRelease();
       sleep(250);
     }
     catch (Exception e) {
