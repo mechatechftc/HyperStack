@@ -219,7 +219,7 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     try {
-      elevator.elevate(-5);
+      elevator.elevate(-3);
       idle();
       movement.yDrive(10, power);
       sleep(500);
