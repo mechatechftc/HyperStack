@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.CloseableVuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.HSConfig;
 import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
@@ -23,6 +24,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
   private Tollbooth tollbooth;
   private Elevator elevator;
 
+  private CloseableVuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
   private VuforiaTrackables relicTrackables;
 
@@ -74,7 +76,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     parameters.vuforiaLicenseKey = HSConfig.getInstance().getVuKey();
     parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-    VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+    vuforia = new CloseableVuforiaLocalizer(parameters);
     relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
     relicTemplate.setName("relicVuMarkTemplate");
@@ -97,9 +99,10 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    sleep(250);
+    sleep(2000);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
     sleep(250);
+    vuforia.close();
     telemetry.addData("VuMark", vuMark.toString());
     telemetry.update();
     return vuMark;
@@ -121,7 +124,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     elevator.elevate(7);
     sleep(100);
     tollbooth.lower(); // Lower tollbooth arm
-    sleep(300);
+    sleep(750);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {

@@ -25,7 +25,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Elevator elevator;
   private final static float power = 0.25f;
 
-  private VuforiaLocalizer vuforia;
+  private CloseableVuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
   private VuforiaTrackables relicTrackables;
 
@@ -101,22 +101,23 @@ public abstract class AutonomousMat extends LinearOpMode {
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    sleep(250);
+    sleep(2000);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
     sleep(250);
+    vuforia.close();
     return vuMark;
   }
 
   private void moveToPictograph() throws Exception {
     sleep(250);
-    movement.yDrive(getPictographDist(), power);
+    movement.yDrive(getPictographDist(), 0.2f);
     sleep(500);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
     tollbooth.lower(); // Lower tollbooth arm
     // notifier.notifyStep();
-    sleep(1000);
+    sleep(750);
     Tollbooth.JewelColor color = tollbooth.checkColor();
     // notifier.notifyStep();
     if (color == allianceColor) {
