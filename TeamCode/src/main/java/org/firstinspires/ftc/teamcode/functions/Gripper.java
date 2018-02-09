@@ -12,6 +12,7 @@ public class Gripper {
   private double closedPosition     =  0.5;
   private double openPosition       =  0.15;
   private double midPosition        =  0.335;
+  private double softOpenPosition   =  0.36;
 
   private OpMode ctx;
   public Servo bigServo;
@@ -66,5 +67,11 @@ public class Gripper {
     bigServo.setPosition(midPosition - 0.18);
     bottomServo.setPosition(midPosition);
     topServo.setPosition(midPosition + 0.04);
+  }
+
+  public void softOpen() {
+    bigServo.setPosition(softOpenPosition - 0.18);
+    bottomServo.setPosition(softOpenPosition);
+    topServo.setPosition(softOpenPosition + 0.04);
   }
 }
