@@ -23,7 +23,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
-  private final static float power = 0.25f;
+  private final static float power = 0.5f;
 
   private CloseableVuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
@@ -111,7 +111,7 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void moveToPictograph() throws Exception {
     sleep(250);
-    movement.yDrive(getPictographDist(), 0.2f);
+    movement.yDrive(getPictographDist(), power);
     sleep(500);
   }
 
