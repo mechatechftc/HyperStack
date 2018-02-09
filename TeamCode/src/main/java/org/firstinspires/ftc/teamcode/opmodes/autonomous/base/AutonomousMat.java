@@ -73,7 +73,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private void turnAndDrive() throws Exception {
     movement.yDrive(-12, power);
     sleep(500);
-    movement.rotate(180,power);
+    movement.rotate(179,power);
     sleep(500);
     gripper.wideRelease();
     sleep(500);
@@ -85,7 +85,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     sleep(500);
     movement.yDrive(-10, power);
     sleep(500);
-    movement.rotate(-180, power);
+    movement.rotate(-179, power);
     sleep(500);
     movement.yDrive(25, power);
     sleep(500);
