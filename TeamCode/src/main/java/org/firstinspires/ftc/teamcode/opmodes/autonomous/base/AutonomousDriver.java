@@ -17,20 +17,20 @@ import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
-abstract public class AutonomousDriver extends LinearOpMode{
+abstract public class AutonomousDriver extends LinearOpMode {
 
   private HSRobot robot;
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
 
-  private CloseableVuforiaLocalizer vuforia;
+  private VuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
   private VuforiaTrackables relicTrackables;
 
   public Movement movement;
 
-  protected float power = 0.5f;
+  protected float power = 0.25f;
   protected double offset = 12;
 
   public abstract Tollbooth.JewelColor getAllianceColor();
@@ -53,7 +53,8 @@ abstract public class AutonomousDriver extends LinearOpMode{
       gripAndElevate();
       bumpJewel(getAllianceColor());
       moveToPictograph();
-      moveToGlyphBox(readPictograph());
+      RelicRecoveryVuMark pictograph = RelicRecoveryVuMark.UNKNOWN; // readPictograph();
+      moveToGlyphBox(pictograph);
       releaseGlyph();
     }
     catch(InterruptedException ie) {
@@ -76,7 +77,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     parameters.vuforiaLicenseKey = HSConfig.getInstance().getVuKey();
     parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-    vuforia = new CloseableVuforiaLocalizer(parameters);
+    vuforia = ClassFactory.createVuforiaLocalizer(parameters);
     relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
     relicTemplate.setName("relicVuMarkTemplate");
@@ -99,10 +100,13 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    sleep(2000);
-    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-    sleep(250);
-    vuforia.close();
+    telemetry.addData("readPictograph", "enter");
+    telemetry.update();
+   // sleep(2000);
+    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.UNKNOWN;
+        //RelicRecoveryVuMark.from(relicTemplate);
+    //sleep(250);
+//    vuforia.close();
     telemetry.addData("VuMark", vuMark.toString());
     telemetry.update();
     return vuMark;

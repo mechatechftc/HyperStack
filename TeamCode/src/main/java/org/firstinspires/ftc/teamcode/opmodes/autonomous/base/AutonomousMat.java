@@ -59,7 +59,8 @@ public abstract class AutonomousMat extends LinearOpMode {
       elevate();
       bumpJewel(getAllianceColor());
       moveToPictograph();
-      moveToGlyphBox(readPictograph());
+      RelicRecoveryVuMark pictograph = readPictograph();
+      moveToGlyphBox(pictograph);
       releaseGlyph();
       turnAndDrive();
     } catch (InterruptedException ie) {

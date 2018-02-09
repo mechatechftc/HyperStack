@@ -8,7 +8,7 @@ public class HSConfig extends Config {
     return INSTANCE;
   }
   private HSConfig() {
-    setLoggingLevel(LoggingLevel.RECOMMENDED);
+    setLoggingLevel(LoggingLevel.VERBOSE);
   }
 
   public String getVuKey() {

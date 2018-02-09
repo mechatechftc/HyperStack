@@ -16,6 +16,8 @@ public class AutonomousDriverBlue extends AutonomousDriver {
   }
 
   public void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
+    telemetry.addData("moveToGlyphBox", "entered");
+    telemetry.update();
     try {
       movement.yDrive(31, power);
       sleep(500);
