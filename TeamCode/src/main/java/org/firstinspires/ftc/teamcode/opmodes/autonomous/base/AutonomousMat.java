@@ -112,7 +112,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private void moveToPictograph() throws Exception {
     sleep(250);
     movement.yDrive(getPictographDist(), power);
-    sleep(500);
+    sleep(250);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
