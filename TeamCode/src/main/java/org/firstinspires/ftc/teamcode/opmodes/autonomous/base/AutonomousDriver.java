@@ -53,7 +53,7 @@ abstract public class AutonomousDriver extends LinearOpMode {
       gripAndElevate();
       bumpJewel(getAllianceColor());
       moveToPictograph();
-      RelicRecoveryVuMark pictograph = RelicRecoveryVuMark.UNKNOWN; // readPictograph();
+      RelicRecoveryVuMark pictograph = readPictograph();
       moveToGlyphBox(pictograph);
       releaseGlyph();
     }
@@ -100,13 +100,9 @@ abstract public class AutonomousDriver extends LinearOpMode {
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    telemetry.addData("readPictograph", "enter");
-    telemetry.update();
-   // sleep(2000);
-    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.UNKNOWN;
-        //RelicRecoveryVuMark.from(relicTemplate);
-    //sleep(250);
-//    vuforia.close();
+    sleep(1000);
+    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+    sleep(250);
     telemetry.addData("VuMark", vuMark.toString());
     telemetry.update();
     return vuMark;
@@ -159,6 +155,8 @@ abstract public class AutonomousDriver extends LinearOpMode {
       elevator.elevate(-5);
       sleep(100);
       gripper.wideRelease();
+      sleep(250);
+      movement.yDrive(-4, power);
       sleep(250);
     }
     catch (Exception e) {

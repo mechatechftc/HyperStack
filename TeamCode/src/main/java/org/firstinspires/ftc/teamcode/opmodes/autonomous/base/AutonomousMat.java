@@ -62,7 +62,7 @@ public abstract class AutonomousMat extends LinearOpMode {
       RelicRecoveryVuMark pictograph = readPictograph();
       moveToGlyphBox(pictograph);
       releaseGlyph();
-      turnAndDrive();
+//      turnAndDrive();
     } catch (InterruptedException ie) {
       throw ie;
     } catch (Exception e) {
@@ -226,6 +226,8 @@ public abstract class AutonomousMat extends LinearOpMode {
       elevator.elevate(-5);
       sleep(100);
       gripper.wideRelease();
+      sleep(250);
+      movement.yDrive(-4, power);
       sleep(250);
     }
     catch (Exception e) {

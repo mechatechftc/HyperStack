@@ -19,7 +19,7 @@ public class AutonomousDriverBlue extends AutonomousDriver {
     telemetry.addData("moveToGlyphBox", "entered");
     telemetry.update();
     try {
-      movement.yDrive(31, power);
+      movement.yDrive(28, power);
       sleep(500);
       movement.xDrive(centerDist, power);
       sleep(500);
