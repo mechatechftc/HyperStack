@@ -23,7 +23,7 @@ public abstract class AutonomousMat extends LinearOpMode {
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
-  private final static float power = 0.5f;
+  private final static float power = 0.35f;
 
   private CloseableVuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
