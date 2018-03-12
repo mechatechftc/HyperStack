@@ -30,7 +30,7 @@ abstract public class AutonomousDriver extends LinearOpMode {
 
   public Movement movement;
 
-  protected float power = 0.35f;
+  protected float power = 0.30f;
   protected double offset = 12;
 
   public abstract Tollbooth.JewelColor getAllianceColor();
