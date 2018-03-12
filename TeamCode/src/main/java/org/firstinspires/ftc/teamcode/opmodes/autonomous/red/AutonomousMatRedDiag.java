@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousMat;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.base.AutonomousMatDiag;
 
 @Autonomous(name = "Red Autonomous Mat Side Diagonal", group = "real.red")
+@Disabled
 public class AutonomousMatRedDiag extends AutonomousMatDiag {
 
   private double centerDist = -38 - getPictographDist();

@@ -30,6 +30,6 @@ public class AutonomousMatRed extends AutonomousMat {
   }
 
   protected double getRotationAngle() {
-    return -80;
+    return -82;
   }
 }
