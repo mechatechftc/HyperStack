@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.base;
 
-import com.disnodeteam.dogecv.DogeCV;
 import com.edinaftc.ninevolt.Config;
 import com.edinaftc.ninevolt.Ninevolt;
 import com.edinaftc.ninevolt.core.hw.drivetrain.Movement;
 import com.edinaftc.ninevolt.util.ExceptionHandling;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
@@ -21,10 +19,11 @@ import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 public abstract class AutonomousMat extends LinearOpMode {
 
   private HSRobot robot;
-  private Movement movement;
+  public Movement movement;
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
+  private final static float power = 0.35f;
 
   private CloseableVuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
@@ -57,12 +56,13 @@ public abstract class AutonomousMat extends LinearOpMode {
       relicTrackables.activate();
 
       // Perform autonomous
-      gripAndElevate();
-      DogeCV dogeCV = new DogeCV();
+      elevate();
       bumpJewel(getAllianceColor());
       moveToPictograph();
-      moveToGlyphBox(readPictograph());
+      RelicRecoveryVuMark pictograph = readPictograph();
+      moveToGlyphBox(pictograph);
       releaseGlyph();
+//      turnAndDrive();
     } catch (InterruptedException ie) {
       throw ie;
     } catch (Exception e) {
@@ -71,32 +71,54 @@ public abstract class AutonomousMat extends LinearOpMode {
     }
   }
 
-  private void gripAndElevate() throws Exception {
+  private void turnAndDrive() throws Exception {
+    movement.yDrive(-12, power);
+    sleep(500);
+    movement.rotate(179,power);
+    sleep(500);
+    gripper.wideRelease();
+    sleep(500);
+    movement.yDrive(25, power);
+    sleep(500);
     gripper.grip();
     sleep(500);
+    elevator.elevate(6);
+    sleep(500);
+    movement.yDrive(-10, power);
+    sleep(500);
+    movement.rotate(-179, power);
+    sleep(500);
+    movement.yDrive(25, power);
+    sleep(500);
+    gripper.midPosition();
+    sleep(500);
+    movement.yDrive(-6, power);
+    sleep(500);
+  }
+
+  private void elevate() throws Exception {
     elevator.elevate(7);
     sleep(500);
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    sleep(250);
+    sleep(2000);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-    idle();
+    sleep(250);
     vuforia.close();
-    idle();
     return vuMark;
   }
 
   private void moveToPictograph() throws Exception {
     sleep(250);
-    movement.yDrive(getPictographDist(), 0.5f);
-    sleep(500);
+    movement.yDrive(getPictographDist(), power);
+    sleep(250);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
     tollbooth.lower(); // Lower tollbooth arm
     // notifier.notifyStep();
-    sleep(1000);
+    sleep(750);
     Tollbooth.JewelColor color = tollbooth.checkColor();
     // notifier.notifyStep();
     if (color == allianceColor) {
@@ -146,6 +168,9 @@ public abstract class AutonomousMat extends LinearOpMode {
     tollbooth = robot.getTollbooth();
     elevator = robot.getElevator();
 
+    gripper.bottomGrip();
+    sleep(250);
+
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
       idle();
     }
@@ -160,7 +185,7 @@ public abstract class AutonomousMat extends LinearOpMode {
     return Tollbooth.JewelColor.INDETERMINATE;
   }
 
-  private void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
+  protected void moveToGlyphBox(RelicRecoveryVuMark vuMark) {
     if (Ninevolt.getConfig().minLoggingLevel(Config.LoggingLevel.VERBOSE)) {
       telemetry.addData("VuMark", vuMark.toString());
       telemetry.update();
@@ -169,24 +194,24 @@ public abstract class AutonomousMat extends LinearOpMode {
       switch (vuMark) {
         case LEFT: {
           sleep(250);
-          movement.yDrive(getYDistLeft(), 0.5f);
+          movement.yDrive(getYDistLeft(), power);
           sleep(1000);
           break;
         }
         case RIGHT: {
           sleep(250);
-          movement.yDrive(getYDistRight(), 0.5f);
+          movement.yDrive(getYDistRight(), power);
           sleep(1000);
           break;
         }
         default: {
           sleep(250);
-          movement.yDrive(getYDistCenter(), 0.5f);
+          movement.yDrive(getYDistCenter(), power);
           sleep(1000);
           break;
         }
       }
-      movement.rotate(getRotationAngle(), 0.5f);
+      movement.rotate(getRotationAngle(), power);
       sleep(500);
     }
     catch (Exception e) {
@@ -196,14 +221,14 @@ public abstract class AutonomousMat extends LinearOpMode {
 
   private void releaseGlyph() {
     try {
+      movement.yDrive(10, power);
+      sleep(250);
       elevator.elevate(-5);
-      idle();
+      sleep(100);
       gripper.wideRelease();
       sleep(250);
-      movement.yDrive(10, 0.5f);
-      sleep(500);
-      movement.yDrive(-4, 0.5f);
-      sleep(1000);
+      movement.yDrive(-4, power);
+      sleep(250);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);

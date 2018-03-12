@@ -9,15 +9,15 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Gripper {
 
-  private double closedPosition     =  0.75;
-  private double lightOpenPosition  =  0.38;
+  private double closedPosition     =  0.5;
   private double openPosition       =  0.15;
-  private double midPosition        =  0.3;
+  private double midPosition        =  0.335;
+  private double softOpenPosition   =  0.36;
 
   private OpMode ctx;
-  private Servo bigServo;
-  private Servo bottomServo;
-  private Servo topServo;
+  public Servo bigServo;
+  public Servo bottomServo;
+  public Servo topServo;
   private boolean gripping;
 
   public Gripper(String bigServoId, String bottomServoId, String topServoId, OpMode ctx) {
@@ -31,9 +31,9 @@ public class Gripper {
   }
 
   public void setPosition(double position) {
-    bigServo.setPosition(position);
+    bigServo.setPosition(position - 0.2);
     bottomServo.setPosition(position);
-    topServo.setPosition(position);
+    topServo.setPosition(position + 0.08);
   }
 
   public double getPosition() {
@@ -47,7 +47,7 @@ public class Gripper {
   }
 
   public void bottomGrip() {
-    bigServo.setPosition(closedPosition);
+    bigServo.setPosition(closedPosition - 0.2);
     bottomServo.setPosition(closedPosition);
   }
 
@@ -57,28 +57,21 @@ public class Gripper {
     updateTelemetry();
   }
 
-  public void lightRelease() {
-    bigServo.setPosition(lightOpenPosition - 0.07);
-    bottomServo.setPosition(lightOpenPosition);
-    topServo.setPosition(lightOpenPosition + 0.08);
-    gripping = false;
-    updateTelemetry();
-  }
-
   public void wideRelease() {
-    bottomServo.setPosition(openPosition);
-    topServo.setPosition(openPosition);
-    bigServo.setPosition(openPosition + 0.1);
+    setPosition(openPosition);
     gripping = false;
     updateTelemetry();
   }
 
   public void midPosition() {
-    setPosition(midPosition);
+    bigServo.setPosition(midPosition - 0.18);
+    bottomServo.setPosition(midPosition);
+    topServo.setPosition(midPosition + 0.04);
   }
 
-  public boolean isGripping() {
-    return gripping;
+  public void softOpen() {
+    bigServo.setPosition(softOpenPosition - 0.18);
+    bottomServo.setPosition(softOpenPosition);
+    topServo.setPosition(softOpenPosition + 0.04);
   }
-
 }

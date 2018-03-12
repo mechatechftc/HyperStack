@@ -20,7 +20,5 @@ repositories {
     }
 }
 dependencies {
-    compile(group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.5-alpha', ext: 'aar', classifier: '')
-    compile project(':openCVLibrary320')
-    compile project(':dogecv')
+    compile(group: 'com.edinaftc.ftc', name: 'NinevoltLib', version: '1.0.8-alpha', ext: 'aar', classifier: '')
 }

@@ -10,25 +10,27 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.teamcode.CloseableVuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.HSConfig;
 import org.firstinspires.ftc.teamcode.HSRobot;
 import org.firstinspires.ftc.teamcode.functions.Elevator;
 import org.firstinspires.ftc.teamcode.functions.Gripper;
 import org.firstinspires.ftc.teamcode.functions.Tollbooth;
 
-abstract public class AutonomousDriver extends LinearOpMode{
+abstract public class AutonomousDriver extends LinearOpMode {
 
   private HSRobot robot;
   private Gripper gripper;
   private Tollbooth tollbooth;
   private Elevator elevator;
 
+  private VuforiaLocalizer vuforia;
   private VuforiaTrackable relicTemplate;
   private VuforiaTrackables relicTrackables;
 
   public Movement movement;
 
-  protected float power = 0.5f;
+  protected float power = 0.35f;
   protected double offset = 12;
 
   public abstract Tollbooth.JewelColor getAllianceColor();
@@ -51,7 +53,8 @@ abstract public class AutonomousDriver extends LinearOpMode{
       gripAndElevate();
       bumpJewel(getAllianceColor());
       moveToPictograph();
-      moveToGlyphBox(readPictograph());
+      RelicRecoveryVuMark pictograph = readPictograph();
+      moveToGlyphBox(pictograph);
       releaseGlyph();
     }
     catch(InterruptedException ie) {
@@ -74,7 +77,7 @@ abstract public class AutonomousDriver extends LinearOpMode{
     parameters.vuforiaLicenseKey = HSConfig.getInstance().getVuKey();
     parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-    VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+    vuforia = ClassFactory.createVuforiaLocalizer(parameters);
     relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
     relicTemplate = relicTrackables.get(0);
     relicTemplate.setName("relicVuMarkTemplate");
@@ -86,6 +89,9 @@ abstract public class AutonomousDriver extends LinearOpMode{
     this.tollbooth = robot.getTollbooth();
     this.elevator = robot.getElevator();
 
+    gripper.bottomGrip();
+    sleep(250);
+
     while (!robot.getHardware().imu.isGyroCalibrated() && opModeIsActive()) {
       telemetry.addData("Gyro", "Calibrating");
       telemetry.update();
@@ -94,18 +100,18 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private RelicRecoveryVuMark readPictograph() {
-    sleep(250);
+    sleep(1000);
     RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-    idle();
+    sleep(250);
     telemetry.addData("VuMark", vuMark.toString());
     telemetry.update();
     return vuMark;
   }
 
   private void moveToPictograph() throws Exception {
-    sleep(500);
-    movement.yDrive(-2, power);
-    sleep(500);
+    sleep(250);
+    movement.yDrive(-5, power);
+    sleep(250);
   }
 
   private Tollbooth.JewelColor oppositionColor(Tollbooth.JewelColor allianceColor) {
@@ -115,11 +121,10 @@ abstract public class AutonomousDriver extends LinearOpMode{
   }
 
   private void gripAndElevate() throws Exception {
-    gripper.grip();
-    sleep(500);
     elevator.elevate(7);
+    sleep(100);
     tollbooth.lower(); // Lower tollbooth arm
-    sleep(1000);
+    sleep(750);
   }
 
   private void bumpJewel(Tollbooth.JewelColor allianceColor) {
@@ -145,14 +150,14 @@ abstract public class AutonomousDriver extends LinearOpMode{
 
   private void releaseGlyph() {
     try {
+      movement.yDrive(10, power);
+      sleep(250);
       elevator.elevate(-5);
-      idle();
+      sleep(100);
       gripper.wideRelease();
       sleep(250);
-      movement.yDrive(8, power);
-      sleep(500);
-      movement.yDrive(-4, 0.5f);
-      sleep(1000);
+      movement.yDrive(-4, power);
+      sleep(250);
     }
     catch (Exception e) {
       ExceptionHandling.standardExceptionHandling(e, this);
